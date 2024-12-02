@@ -1,9 +1,9 @@
 ﻿=== HD Quiz ===
 Contributors: Harmonic_Design, HarmonicDesign
-Tags: quiz, quizzes, MCQ, exam, quiz maker, questionnaire, questionnaires, questionnairs, quizes, questionair, questionaires, hdquiz, hd quiz, test, question and answers, harmonic design, HDPlugins
+Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
-Tested up to: 6.6.1
-Stable tag: 1.8.15
+Tested up to: 6.7.1
+Stable tag: 2.0.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -28,19 +28,22 @@ The quizzes are fun, beautiful, highly customizable, accessible (visually impair
 
 ## ▶️ VIEW VIDEO DEMO / TUTORIAL ▶️
 
-https://www.youtube.com/watch?v=YDyNDs3TdTs
+# https://www.youtube.com/watch?v=YDyNDs3TdTs
 
 ## ✨ Features ✨
-HD Quiz has *so many* cool features, settings, and options, that I cannot possibly list them all. So here are some of the highlights of what I think are some of the coolest and most important features of HD Quiz. **Everything you see listed here is included by default and 100% FREE!**
+HD Quiz has *so many* cool features, settings, and options, that I cannot possibly list them all. So here are some of the highlights of what I think are some of the coolest and most important features of HD Quiz. **Everything you see listed here is 100% FREE!**
+
+## ALWAYS FEEL FREE TO REQUEST SUPPORT
 
 [See full documentation](https://hdplugins.com/learn/hd-quiz/hd-quiz-documentation/?utm_source=WPOrgPluginPage)
 
-- Unlimited amount of quizzes and questions
+- Unlimited amount of quizzes, questions, and answers
+- Scored quizzes and Personalty-type quizzes
 - Each quiz has its own options/settings
-- Social sharing - share quiz results on Twitter or Facebook
+- Social sharing - share quiz results on Twitter, Facebook, and others
 - Mobile and touch friendly
 - Quizzes are accessible (screen readers)
-- Each question can have a featured image and or tooltip
+- Each question can have a featured image, tooltip, or even audio/video
 - Each question can have "extra" text, that by default will appear if the user gets the question wrong
 - Multiple question types
 	- text based multiple choice
@@ -62,13 +65,13 @@ HD Quiz has *so many* cool features, settings, and options, that I cannot possib
 - Marking options
 	- Show the correct and incorrect questions
 	- If user got the question wrong, show what the correct answer was
-	- immediately mark the question on selection
-- custom pass percent
-- custom result text (based on if the user passed or failed the quiz)
-- automatically hide the questions on quiz completion
-- allow "authors" to create quizzes
+	- Immediately mark the question on selection
+- Custom pass percent
+- Custom result text (based on if the user passed or failed the quiz)
+- Automatically hide the questions on quiz completion
+- Allow "authors" to create quizzes
 - **free addon to save results of quizzes**
-- and i'm sure a ton of other things that I can't even remember
+- and I'm sure a ton of other things that I can't even remember
 
 Have any questions or want additional information? [view the Harmonic Design HD Quiz plugin page here](https://hdplugins.com/forum/hd-quiz-support/?utm_source=WPOrgPluginPage "view the HD Quiz plugin page here").
 
@@ -103,12 +106,10 @@ If you have any feature requests, then please let me know via the support tab or
 
 **TODO List** - please note that there are no timelines for completion of any of the following features and this list is not in any particular order.
 
- - Fully translation ready (not just the quizzes, but the entire admin area)
- - Featured image / media upgrade. Ability to use embedded media (youtube video, vimeo etc)
  - Dynamic results - instead of just pass/fail results, we can create as many results as needed. Example, a 0% result and a 100% perfect score result.
  - "hookable" question types - ability for any developer to add custom question types
- - better author mode integration
- - Gamify compatibility? (let me know if this is something you are interested in) 
+ - Gamify compatibility? (let me know if this is something you are interested in)
+ - Load via Ajax
 
 == Installation ==
 
@@ -152,6 +153,14 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.0.0 =
+* Personality Type Quizzes
+* Complete redevelopment of HD Quiz
+* Faster, better admin area
+* Better translations
+* New quiz features
+
+
 = 1.8.15 =
 * More translations
 * New global setting to replace the_content filter on quizzes (should help stop other plugins from adding content to quizzes)
@@ -324,6 +333,9 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 1.8.14 =
-* First steps to make HD Quiz translation ready!
-* Not everything is translatable, but most major headings and buttons are
+= 2.0.0 =
+* Personality Type Quizzes
+* Complete redevelopment of HD Quiz
+* Faster, better admin area
+* Better translations
+* New quiz features
