@@ -274,7 +274,8 @@ class _hdq_settings
 			return "";
 		}
 		$c = base64_decode($ciphertext);
-		$ivlen = openssl_cipher_iv_length("AES-128-CBC");
+		$cipher = "AES-128-CBC";
+		$ivlen = openssl_cipher_iv_length($cipher);
 		$iv = substr($c, 0, $ivlen);
 		$hmac = substr($c, $ivlen, $sha2len = 32);
 		$ciphertext_raw = substr($c, $ivlen + $sha2len);

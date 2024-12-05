@@ -3,7 +3,7 @@ Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
 Tested up to: 6.7.1
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -153,6 +153,12 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.0.1 =
+* Minor bug fixes
+* Fix open_ssl
+* Fix translations for quiz settings
+* Better editor sizing
+
 = 2.0.0 =
 * Personality Type Quizzes
 * Complete redevelopment of HD Quiz
@@ -333,9 +339,8 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.0.0 =
-* Personality Type Quizzes
-* Complete redevelopment of HD Quiz
-* Faster, better admin area
-* Better translations
-* New quiz features
+= 2.0.1 =
+* Minor bug fixes
+* Fix open_ssl
+* Fix translations for quiz settings
+* Better editor sizing

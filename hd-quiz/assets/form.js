@@ -54,7 +54,7 @@ export const form = {
 				toolbar3: "",
 				toolbar4: "",
 				tabfocus_elements: "content-html,save-post",
-				wp_autoresize_on: true,
+				wp_autoresize_on: false,
 				add_unload_trigger: false,
 				block_formats: "Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Code=code",
 			});

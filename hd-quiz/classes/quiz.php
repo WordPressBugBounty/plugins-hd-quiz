@@ -43,7 +43,7 @@ class _hdq_quiz
 	{
 		$fields = '[
 	{
-		"label": "' . __("Results", "hd-quiz") . '",
+		"label": "' . trim(__("Results", "hd-quiz")) . '",
 		"id": "Results",
 		"children": [
 			{				
@@ -91,7 +91,7 @@ class _hdq_quiz
 		]
 	},
 	{
-		"label": "' . __("Marking", "hd-quiz") . '",
+		"label": "' . trim(__("Marking", "hd-quiz")) . '",
 		"id": "Marking",
 		"children": [
 			{
@@ -169,7 +169,7 @@ class _hdq_quiz
 		]
 	},
 	{
-		"label": "' . __("Timer", "hd-quiz") . '",
+		"label": "' . trim(__("Timer", "hd-quiz")) . '",
 		"id": "Timer",
 		"children": [
 			{ "content": "If the timer is enabled, the quiz will be hidden behind a \"START QUIZ\" button. You can rename this button from the HD Quiz -> About / Options page", "type": "content" },
@@ -206,7 +206,7 @@ class _hdq_quiz
 		]
 	},
 	{
-		"label": "' . __("Advanced", "hd-quiz") . '",
+		"label": "' . trim(__("Advanced", "hd-quiz")) . '",
 		"id": "Advanced",
 		"children": [
             { "content": "If you are having trouble with either the Randomization options, or the Pool of Questions, make sure you do not have page caching enabled on the pages with quizzes. Your caching solution is creating a static version of the quiz once, and loading that same order each time.", "type": "content" },
@@ -290,7 +290,7 @@ class _hdq_quiz
 						"id": "rename_quiz",
 						"label": "Rename quiz",
 						"required": true,
-						"default": "' . $this->quiz_name . '",						
+						"default": "' . addslashes($this->quiz_name) . '",
 						"placeholder": "",
 						"type": "text"
 					}
@@ -300,6 +300,7 @@ class _hdq_quiz
 	}
 ]
 ';
+
 		$data = json_decode($fields, true);
 
 		$fields = array();
@@ -315,7 +316,7 @@ class _hdq_quiz
 	{
 		$fields = '[
 	{
-		"label": "' . __("Results", "hd-quiz") . '",
+		"label": "' . trim(__("Results", "hd-quiz")) . '",
 		"id": "Results",
 		"children": [
 			{ "content": "This is a brand new quiz type. New options and features will be added to it as development continues.\nPlease feel free to contact me on the HDPlugins support forum to provide any feedback.\n\nEach answer will award points towards one of these outcomes. The outcome with the highest score will be the final result. In the event that multiple outcomes are possible (a tie), the first possible outcome will be the final result.", "type": "content" },
@@ -323,7 +324,7 @@ class _hdq_quiz
 		]
 	},
 	{
-		"label": "' . __("Advanced", "hd-quiz") . '",
+		"label": "' . trim(__("Advanced", "hd-quiz")) . '",
 		"id": "Advanced",
 		"children": [
 			{

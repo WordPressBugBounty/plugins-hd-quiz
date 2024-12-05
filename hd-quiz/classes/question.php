@@ -94,7 +94,7 @@ class _hdq_question
 
         $fields = '[
 	{
-		"label": "' . __("Main", "hd-quiz") . '",
+		"label": "' . trim(__("Main", "hd-quiz")) . '",
 		"id": "Main",
 		"children": [
             {
@@ -121,7 +121,7 @@ class _hdq_question
 		]
 	},
 	{
-		"label": "' . __("Extra", "hd-quiz") . '",
+		"label": "' . trim(__("Extra", "hd-quiz")) . '",
 		"id": "Extra",
 		"children": [
 			{

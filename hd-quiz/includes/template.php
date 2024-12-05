@@ -52,8 +52,12 @@ if ($data["settings"]["adset_code"] !== "") {
 $hdq_local_vars = hdq_get_local_vars($data["quiz"], $data["settings"]);
 $hdq_local_vars->quiz_name = $quiz_name->name;
 $hdq_local_vars = 'const HDQ_VERSION = "' . HDQ_PLUGIN_VERSION . '"; const HDQ_DATA = ' . json_encode($hdq_local_vars) . ';';
-wp_add_inline_script('hdq_script', $hdq_local_vars, "before");
+// wp_add_inline_script('hdq_script', $hdq_local_vars, "before"); // Causes some cache plugins to print this out twice if `wp_add_inline_script` is called more than once...
 ?>
+
+<script>
+    <?php echo $hdq_local_vars; ?>
+</script>
 
 <div class="hdq_quiz_wrapper" id="hdq_<?php echo esc_attr($quiz_id); ?>">
     <div id="hdq_offset_div" class="hdq_offset_div" style="width: 1px; height: 1px; position: relative; opacity: 0; pointer-events: none; user-select: none;z-index: 0; relative; top: -4rem; background-color:red">&nbsp;</div>
