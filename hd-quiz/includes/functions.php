@@ -1,13 +1,17 @@
 <?php
 /* Check if logged in user has correct permissions
 ------------------------------------------------------- */
-function hdq_user_permission()
+function hdq_user_permission($settings = null)
 {
     if (current_user_can("manage_options")) {
         return true;
     }
-    $settings = new _hdq_settings(true);
-    $settings = $settings->data;
+
+    if ($settings === null) {
+        $settings = new _hdq_settings(true);
+        $settings = $settings->data;
+    }
+
     if (isset($settings["allow_authors_access"]) && $settings["allow_authors_access"] === "yes") {
         if (current_user_can("publish_posts")) {
             return true;

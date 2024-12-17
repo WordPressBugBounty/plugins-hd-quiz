@@ -94,7 +94,7 @@ class _hdq_question
 
         $fields = '[
 	{
-		"label": "' . trim(__("Main", "hd-quiz")) . '",
+		"label": "' . esc_attr(trim(__("Main", "hd-quiz"))) . '",
 		"id": "Main",
 		"children": [
             {
@@ -121,7 +121,7 @@ class _hdq_question
 		]
 	},
 	{
-		"label": "' . trim(__("Extra", "hd-quiz")) . '",
+		"label": "' . esc_attr(trim(__("Extra", "hd-quiz"))) . '",
 		"id": "Extra",
 		"children": [
 			{
@@ -230,9 +230,9 @@ class _hdq_question
         return $title;
     }
 
-    private function validateAccess($data)
+    private function validateAccess()
     {
-        if (!current_user_can("manage_options")) {
+        if (!current_user_can("publish_posts")) {
             // must be author. make sure Ids match
             $author_id = intval(get_term_meta($this->quiz_id, "hdq_author_id", true));
             $user_id = get_current_user_id();
@@ -307,7 +307,7 @@ class _hdq_question
         );
 
         $question_types = array(
-            "text_based" => "text_based_answers",
+            "text_based" => "text_based_answer",
             "title" => "question_as_title"
         );
 

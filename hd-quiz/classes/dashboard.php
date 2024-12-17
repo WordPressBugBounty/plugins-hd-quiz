@@ -23,25 +23,25 @@ class _hdq_dashboard
         [
             {
 				"id": "hdq_quiz_name",
-				"label": "' . __("Quiz name", "hd-quiz") . '",
+				"label": "' . esc_attr(trim(__("Quiz name", "hd-quiz"))) . '",
 				"required": true,
 				"placeholder": "' . __("Enter quiz name", "hd-quiz") . '",
 				"type": "text"
 			},
             {
 				"id": "hdq_quiz_type",
-				"label": "' . __("Quiz type", "hd-quiz") . '",
+				"label": "' . esc_attr(trim(__("Quiz type", "hd-quiz"))) . '",
 				"required": true,
 				"default": "general",
 				"type": "select",
                 "tooltip": "<p><strong>General</strong> is the default quiz type and is meant for traditional quizzes with scores.</p><p><strong>Personality</strong> is a new quiz type and is meant to make quizzes similar to \"Which Harry Potter Character are you?\"</p>",
                 "options": [
                     {
-                        "label": "' . __("General / Scored", "hd-quiz") . '",
+                        "label": "' . esc_attr(trim(__("General / Scored", "hd-quiz"))) . '",
                         "value": "general"
                     },
                     {
-                        "label": "' . __("Personality", "hd-quiz") . '",
+                        "label": "' . esc_attr(trim(__("Personality", "hd-quiz"))) . '",
                         "value": "personality"
                     }
                 ]
@@ -49,7 +49,7 @@ class _hdq_dashboard
             {
 			    "id": "hdq_add_quiz_content",
 				"type": "content",
-                "content": "<div id=\"hd_save\" data-action=\"hdq_create_quiz\" class=\"hdq_button hdq_button_primary hd_kb\" data-label = \"' . __("Save", "hd-quiz") . '\" role=\"button\" tabindex=\"0\">' . __("Create", "hd-quiz") . '</div>"
+                "content": "<div id=\"hd_save\" data-action=\"hdq_create_quiz\" class=\"hdq_button hdq_button_primary hd_kb\" data-label = \"' . esc_attr(trim(__("Create", "hd-quiz"))) . '\" role=\"button\" tabindex=\"0\">' . esc_attr(trim(__("Create", "hd-quiz"))) . '</div>"
             }
         ]';
         $data = json_decode($fields, true);
@@ -74,7 +74,7 @@ class _hdq_dashboard
                 // if author mode is active, only show quizzes belonging to current author (or admins access all)
                 $quiz_type = sanitize_text_field(get_term_meta($quiz->term_id, "hdq_quiz_type", true));
                 $author_id = intval(get_term_meta($quiz->term_id, "hdq_author_id", true));
-                if ($this->settings["allow_authors_access"] === "yes" && $author_id !== $user_id && !current_user_can('administrator')) {
+                if ($this->settings["allow_authors_access"] === "yes" && $author_id !== $user_id && !current_user_can('publish_posts')) {
                     continue;
                 }
 

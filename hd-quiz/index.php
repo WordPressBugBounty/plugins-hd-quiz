@@ -5,7 +5,7 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.0.1
+    * Version: 2.0.2
 	* Text Domain: hd-quiz
 	* Domain Path: /languages
 */
@@ -23,7 +23,7 @@ if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.0.1');
+    define('HDQ_PLUGIN_VERSION', '2.0.2');
 }
 
 // Settings that a power user might want to change,
@@ -124,11 +124,11 @@ function hdq_create_settings_page()
             add_menu_page('HD Quiz', 'HD Quiz', 'publish_posts', 'hdq_quizzes', 'hdq_main_page', 'dashicons-clipboard', 5);
 
             add_submenu_page("hdq_quizzes", "HD Quiz Addons", __("Addons", "hd-quiz") . $addon_text, "delete_others_posts", "hdq_addons", "hdq_addons_page");
-            add_submenu_page("hdq_quizzes", "HD Quiz Tools", __("Tools", "hd-quiz"), "delete_others_posts", "hdq_tools", "hdq_tools_page");
-            add_submenu_page("hdq_quizzes", "HD Quiz Settings", __("Settings", "hd-quiz"), "delete_others_posts", 'hdq_options', 'hdq_about_settings_page');
+            add_submenu_page("hdq_quizzes", "HD Quiz Tools", __("Tools", "hd-quiz"), "manage_options", "hdq_tools", "hdq_tools_page");
+            add_submenu_page("hdq_quizzes", "HD Quiz Settings", __("Settings", "hd-quiz"), "manage_options", 'hdq_options', 'hdq_about_settings_page');
 
             // tools, hidden pages
-            add_submenu_page("", "CSV Importer", "CSV Importer", "publish_posts", "hdq_importer", "hdq_tools_csv_importer");
+            add_submenu_page("", "CSV Importer", "CSV Importer", "manage_options", "hdq_importer", "hdq_tools_csv_importer");
         }
         add_action('admin_menu', 'hdq_register_quizzes_page');
     }

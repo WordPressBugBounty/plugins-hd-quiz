@@ -873,7 +873,7 @@ const HDQ = {
 
 		let status = false;
 		let percent = (score[0] / score[1]) * 100;
-		if (percent > HDQ.VARS.quiz.quiz_pass_percentage) {
+		if (percent >= HDQ.VARS.quiz.quiz_pass_percentage) {
 			status = true;
 		}
 

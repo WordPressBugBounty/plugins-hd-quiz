@@ -15,7 +15,7 @@ class _hdq_settings
 	{
 		$fields = '[
 	{
-		"label": "' . __("General", "hd-quiz") . '",
+		"label": "' . esc_attr(trim(__("General", "hd-quiz"))) . '",
 		"id": "General",
 		"children": [
 			{
@@ -88,8 +88,8 @@ class _hdq_settings
 						"label": "Allow authors access to create quizzes",
 						"required": "",
 						"default": "no",
-						"tooltip": "",
-						"description": "By default, only Editors or Admins can add or edit questions. Enabling this will allow Authors to create quizzes as well.",
+						"tooltip": "Authors can only edit their own quizzes. Enabling this also grants the Editor role access to edit all quizzes.",
+						"description": "By default, only Admins can add or edit questions. Enabling this will allow Authors to create quizzes as well.",
 						"placeholder": "",
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
@@ -143,22 +143,22 @@ class _hdq_settings
 		]
 	},
 	{
-		"label": "' . __("Translations", "hd-quiz") . '",
+		"label": "' . esc_attr(trim(__("Translations", "hd-quiz"))) . '",
 		"id": "Translations",
 		"children": [
 			{
 				"column_type": "1-1",
 				"type": "column",
 				"children": [
-					{ "id": "translate_finish", "label": "Rename \"Finish\" Button", "required": "", "default": "' . __("Finish", "hd-quiz") . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
-					{ "id": "translate_next", "label": "Rename \"Next\" Button", "required": "", "default": "' . __("Next", "hd-quiz") . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
-					{ "id": "translate_previous", "label": "Rename \"Previous\" Button", "required": "", "default": "' . __("Previous", "hd-quiz") . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
-					{ "id": "translate_results", "label": "Rename \"Results\" text", "required": "", "default": "' . __("Results", "hd-quiz") . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
+					{ "id": "translate_finish", "label": "Rename \"Finish\" Button", "required": "", "default": "' . esc_attr(trim(__("Finish", "hd-quiz"))) . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
+					{ "id": "translate_next", "label": "Rename \"Next\" Button", "required": "", "default": "' . esc_attr(trim(__("Next", "hd-quiz"))) . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
+					{ "id": "translate_previous", "label": "Rename \"Previous\" Button", "required": "", "default": "' . esc_attr(trim(__("Previous", "hd-quiz"))) . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
+					{ "id": "translate_results", "label": "Rename \"Results\" text", "required": "", "default": "' . esc_attr(trim(__("Results", "hd-quiz"))) . '", "placeholder": "", "description": "", "tooltip": "", "prefix": "", "postfix": "", "type": "text" },
 					{
 						"id": "translate_quiz_start",
 						"label": "Rename \"QUIZ START\" text",
 						"required": "",
-						"default": "' . __("QUIZ START", "hd-quiz") . '",
+						"default": "' . esc_attr(trim(__("QUIZ START", "hd-quiz"))) . '",
 						"placeholder": "",
 						"description": "",
 						"tooltip": "Used if you are using a timer feature, or for direct links to the quiz on category/search pages",
@@ -170,7 +170,7 @@ class _hdq_settings
 						"id": "translate_enter_answer_here",
 						"label": "Rename \"enter answer here\" text",
 						"required": "",
-						"default": "' . __("enter answer here", "hd-quiz") . '",
+						"default": "' . esc_attr(trim(__("enter answer here", "hd-quiz"))) . '",
 						"placeholder": "",
 						"description": "This text appears as a placeholder for the \"Text Based Answers\" question type",
 						"tooltip": "",
@@ -182,7 +182,7 @@ class _hdq_settings
 						"id": "translate_select_all_that_apply",
 						"label": "Rename \"Select all that apply:\" text",
 						"required": "",
-						"default": "' . __("Select all that apply:", "hd-quiz") . '",
+						"default": "' . esc_attr(trim(__("Select all that apply:", "hd-quiz"))) . '",
 						"placeholder": "",
 						"description": "This text appears as a placeholder for the \"Select All That Apply\" question type",
 						"tooltip": "",
@@ -194,7 +194,7 @@ class _hdq_settings
 						"id": "translate_submit",
 						"label": "Rename \"Submit\" button text",
 						"required": "",
-						"default": "' . __("Submit", "hd-quiz") . '",
+						"default": "' . esc_attr(trim(__("Submit", "hd-quiz"))) . '",
 						"placeholder": "",
 						"description": "This button appears with the \"Select all that apply\" question type when either \"Immediately mark answer as correct or incorrect\" is enabled, or Timer per question is enabled.",
 						"tooltip": "",
