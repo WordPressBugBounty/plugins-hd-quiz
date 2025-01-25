@@ -508,7 +508,10 @@ function hdq_print_quiz_start($data)
         return $quiz_start;
     }
 
-    $quiz_start["html"] = '<div class="hdq_quiz_start hdq_button hdq_kb" role="button" tabindex="0">' . esc_attr($data["settings"]["translate_quiz_start"]) . '</div>';
+    $label = $data["settings"]["translate_quiz_start"];
+    $label = str_replace("%quiz%", $data["quiz"]["quiz_name"], $label);
+
+    $quiz_start["html"] = '<div class="hdq_quiz_start hdq_button hdq_kb" role="button" tabindex="0">' . esc_attr($label) . '</div>';
     $quiz_start["classes"] = "hdq_hidden";
     return $quiz_start;
 }

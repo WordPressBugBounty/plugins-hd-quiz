@@ -28,7 +28,19 @@ export const self = {
 		HDQ.form.tabs();
 
 		document.getElementById("hdq_copy_shortcode").addEventListener("click", function () {
-			navigator.clipboard.writeText(this.innerText);
+			const el = this;
+			if (el.classList.contains("active")) {
+				return;
+			}
+			el.classList.add("active");
+			let shortcode = el.innerText;
+			navigator.clipboard.writeText(el.innerText);
+
+			el.innerText = "copied to clipboard";
+			setTimeout(function () {
+				el.innerText = shortcode;
+				el.classList.remove("active");
+			}, 3000);
 		});
 
 		if (data.type === "personality") {

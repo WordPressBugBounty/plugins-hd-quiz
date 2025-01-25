@@ -19,7 +19,7 @@ ob_start();
             );
 
             $checked = "";
-            if ($this->doesAnswerExist($data[$i])) {
+            if (isset($data[$i]) && $this->doesAnswerExist($data[$i])) {
                 if (isset($data[$i]["value"])) {
                     $answer["value"] = $data[$i]["value"];
                 }

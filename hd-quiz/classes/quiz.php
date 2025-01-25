@@ -43,8 +43,8 @@ class _hdq_quiz
 	{
 		$fields = '[
 	{
-		"label": " ' . esc_attr(trim(__("Results", "hd-quiz"))) . '",
-		"id": " Results",
+		"label": "' . esc_attr(trim(__("Results", "hd-quiz"))) . '",
+		"id": "Results",
 		"children": [
 			{				
 				"column_type": "1-1",
@@ -290,7 +290,7 @@ class _hdq_quiz
 						"id": "rename_quiz",
 						"label": "Rename quiz",
 						"required": true,
-						"default": "' . esc_attr(trim(addslashes($this->quiz_name))) . '",
+						"default": "' . esc_attr(trim($this->quiz_name)) . '",
 						"placeholder": "",
 						"type": "text"
 					}
@@ -302,6 +302,21 @@ class _hdq_quiz
 ';
 
 		$data = json_decode($fields, true);
+		if ($data === null) {
+			$data = json_decode('[
+	{
+		"label": "Error",
+		"id": "Results",
+		"children": [
+			{
+				"type": "content",
+				"content": "There was an issue decoding the JSON string for these quiz settings. This is usually caused by use of an invalid character in one of the settings. Please <a href = \"https://hdplugins.com/forum/hd-quiz-support/\" target = \"_blank\">request support</a> for help and provide useful information such as what language you are using, or if you can think of anything special might have done to trigger this."
+			}
+		]
+	}
+]
+', true);
+		}
 		$fields = array();
 		foreach ($data as $k => $tab) {
 			$fields[$tab["id"]] = $tab;

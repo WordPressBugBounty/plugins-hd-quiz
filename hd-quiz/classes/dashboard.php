@@ -96,11 +96,11 @@ class _hdq_dashboard
 
     private function getHeader()
     {
-        $hdq_updated = sanitize_text_field(get_option('HDQ_UPDATED'));
+        // $hdq_updated = sanitize_text_field(get_option('HDQ_UPDATED'));
         $notice = "";
-        if ($hdq_updated) {
-            $notice .= '<div id = "hdq_about" style = "margin: 2rem 0; max-width: 100%; padding: 1em;"><p style = "margin-top: 0;"><strong>Thank you for updating to HD Quiz 2.0</strong></p><p style = "margin-bottom: 0;">This new version is far more powerful than the previous versions, and was rewritten from the ground up. Please <a href = "https://hdplugins.com/forum/hd-quiz-support/" target = "_blank">let me know</a> if you experience any issues or bugs. You can also always safely downgrade to the previous version <a href = "https://wordpress.org/plugins/hd-quiz/advanced/#plugin-download-history-stats" target = "_blank">here</a>.</p></div>';
-        }
+        // if ($hdq_updated) {
+        //     $notice .= '<div id = "hdq_about" style = "margin: 2rem 0; max-width: 100%; padding: 1em;"><p style = "margin-top: 0;"><strong>Thank you for updating to HD Quiz 2.0</strong></p><p style = "margin-bottom: 0;">This new version is far more powerful than the previous versions, and was rewritten from the ground up. Please <a href = "https://hdplugins.com/forum/hd-quiz-support/" target = "_blank">let me know</a> if you experience any issues or bugs. You can also always safely downgrade to the previous version <a href = "https://wordpress.org/plugins/hd-quiz/advanced/#plugin-download-history-stats" target = "_blank">here</a>.</p></div>';
+        // }
         return '<div id="hdq_header" class = "">
         <h1 id="hdq_heading_title">HD Quiz - WordPress Quiz Builder</h1>
         <div id="hdq_header_actions">

@@ -18,7 +18,7 @@ ob_start();
             );
 
             $checked = "";
-            if ($this->doesAnswerExist($data[$i])) {
+            if (isset($data[$i]) && $this->doesAnswerExist($data[$i])) {
                 if (isset($data[$i]["value"])) {
                     $answer["value"] = $data[$i]["value"];
                 }
@@ -37,7 +37,7 @@ ob_start();
                             <div class="hd_input_row">
                                 <label class="hd_label_input" data-type="radio" data-id="hdq_correct_answer" for="hdq_correct_answer_<?php echo $i; ?>">
                                     <div class="hd_options_check">
-                                        <input type="checkbox" title="Correct" data-answer-type="selected" data-id="hdq_correct_answer" class="hd_option hd_check_input hdq_answer_item_input" data-type="radio" value="yes" name="hdq_correct_answer_<?php echo $i; ?>" autocomplete="off" id="hdq_correct_answer_<?php echo $i; ?>" <?php echo $checked; ?>/>
+                                        <input type="checkbox" title="Correct" data-answer-type="selected" data-id="hdq_correct_answer" class="hd_option hd_check_input hdq_answer_item_input" data-type="radio" value="yes" name="hdq_correct_answer_<?php echo $i; ?>" autocomplete="off" id="hdq_correct_answer_<?php echo $i; ?>" <?php echo $checked; ?> />
                                         <span class="hd_toggle"><span class="hd_aria_label" style="display: none">Correct answer</span></span>
                                     </div>
                                 </label>

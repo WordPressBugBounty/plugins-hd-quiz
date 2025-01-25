@@ -20,7 +20,7 @@ ob_start();
                 "image" => 0
             );
             $checked = "";
-            if ($this->doesAnswerExist($data[$i])) {
+            if (isset($data[$i]) && $this->doesAnswerExist($data[$i])) {
                 if (isset($data[$i]["value"])) {
                     $answer["value"] = $data[$i]["value"];
                 }

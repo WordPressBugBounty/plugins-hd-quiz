@@ -281,7 +281,7 @@ const HDQ = {
 			HDQ.VARS.timer.current = HDQ.VARS.timer.current - 1;
 		},
 		init: function () {
-			if (HDQ.VARS.quiz.timer == "" || parseInt(HDQ.VARS.quiz.timer) < 3) {
+			if (typeof HDQ.VARS.quiz.timer === "undefined" || HDQ.VARS.quiz.timer == "" || parseInt(HDQ.VARS.quiz.timer) < 3) {
 				return; // force minimum 3 second timer
 			}
 			let start_button = HDQ.el.getElementsByClassName("hdq_quiz_start");
@@ -317,6 +317,7 @@ const HDQ = {
 				HDQ.el.getElementsByClassName("hdq_quiz")[0].children[1].getElementsByClassName("hdq_next_button")[0].click();
 			}
 			quiz_el.classList.remove("hdq_hidden");
+			quiz_el.style.display = "block";
 
 			if (HDQ.VARS.quiz.timer_per_question === "yes") {
 				HDQ.paginate.removeAll();
@@ -356,7 +357,7 @@ const HDQ = {
 		},
 		end: function (submit = false) {
 			const el = document.getElementsByClassName("hdq_timer")[0];
-			el.classList = "hdq_timer";
+			el.classList = "hdq_timer hdq_timer_complete";
 			HDQ.VARS.timer.active = false;
 			clearInterval(HDQ.timer.interval);
 			if (submit) {

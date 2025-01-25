@@ -3,7 +3,7 @@ Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
 Tested up to: 6.7.1
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -153,6 +153,12 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.0.3 =
+* Better quiz rename with special characters
+* If quiz settings borked, timer no longer auto-completes quiz
+* Various minor enhancements
+* Minor debug cleanup
+
 = 2.0.2 =
 * Minor bug fixes
 * More translation options
@@ -345,8 +351,8 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.0.2 =
-* Minor bug fixes
-* More translation options
-* Quiz name variable as part of Start Quiz button
-* Better editor permissions
+= 2.0.3 =
+* Better quiz rename with special characters
+* If quiz settings borked, timer no longer auto-completes quiz
+* Various minor enhancements
+* Minor debug cleanup

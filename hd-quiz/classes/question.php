@@ -61,16 +61,14 @@ class _hdq_question
     {
         $this->quiz_id = intval($quiz_id);
         $this->question_id = intval($question_id);
-
         $this->getQuiz();
+
         $quiz_type = sanitize_text_field(get_term_meta($this->quiz_id, "hdq_quiz_type", true));
         if ($quiz_type === "personality") {
             $this->quiz_type = $quiz_type;
         }
-
         $this->fields();
         $this->get($flat);
-
         $this->question_types = apply_filters("hdq_add_question_type", $this->question_types);
 
         if (defined("HDQ_MAX_ANSWERS")) {
@@ -226,7 +224,7 @@ class _hdq_question
                 $title = $data["question_title"]["value"];
             }
         }
-        $title = wp_kses_post($title);
+        $title = wp_kses_post(wp_slash($title));
         return $title;
     }
 
@@ -263,7 +261,6 @@ class _hdq_question
             $data = array();
         }
         $data = $this->mapOld($data);
-
         $title = $this->getTitle($data, $flat);
 
         $fields = new hdquiz\_hd_fields($this->fields, $data);
@@ -416,7 +413,7 @@ class _hdq_question
 
         $data["question_title"]["value"] = $title;
 
-        update_post_meta($this->question_id, "hdq_question_data", $data);
+        update_post_meta($this->question_id, "hdq_question_data", wp_slash($data));
 
         // in case title was updated
         $post_main = array(
@@ -424,7 +421,6 @@ class _hdq_question
             'post_title'   => $data["question_title"]["value"]
         );
         wp_update_post($post_main);
-
 
         $res = new stdClass();
         $res->status = "success";

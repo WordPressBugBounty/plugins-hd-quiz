@@ -127,6 +127,7 @@ function hdq_get_question_type()
     if (isset($_POST["quiz_id"])) {
         $quiz_id = intval($_POST["quiz_id"]);
     }
+    
     $question_id = 0;
     if (isset($_POST["question_id"])) {
         $question_id = intval($_POST["question_id"]);
@@ -143,9 +144,8 @@ function hdq_save_question()
     hdq_validate_nonce($_POST);
 
     $data = $_POST["data"];
-    $data = stripslashes($data);
+    $data = stripcslashes($data);
     $data = json_decode($data, true);
-
     $quiz_id = 0;
     if (isset($data["quiz_id"])) {
         $quiz_id = intval($data["quiz_id"]["value"]);

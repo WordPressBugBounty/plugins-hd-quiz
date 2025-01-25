@@ -5,7 +5,7 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.0.2
+    * Version: 2.0.3
 	* Text Domain: hd-quiz
 	* Domain Path: /languages
 */
@@ -23,32 +23,36 @@ if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.0.2');
+    define('HDQ_PLUGIN_VERSION', '2.0.3');
 }
 
 // Settings that a power user might want to change,
 // but that I don't want to have a dedicated setting for
-if (!defined('HDQ_TWITTER_SHARE_ICON')) {
-    define('HDQ_TWITTER_SHARE_ICON', false);
+function hdq_admin_init()
+{
+    if (!defined('HDQ_TWITTER_SHARE_ICON')) {
+        define('HDQ_TWITTER_SHARE_ICON', false);
+    }
+    if (!defined('HDQ_MAX_ANSWERS')) {
+        define('HDQ_MAX_ANSWERS', 10);
+    }
+    if (!defined('HDQ_REDIRECT')) {
+        define('HDQ_REDIRECT', true);
+    }
+    if (!defined('HDQ_FORCE_ORDER')) {
+        define('HDQ_FORCE_ORDER', false);
+    }
+    if (!defined('HDQ_PER_PAGE')) {
+        define('HDQ_PER_PAGE', 50);
+    }
+    if (!defined('HDQ_DISABLE_PREV_BUTTON')) {
+        define('HDQ_DISABLE_PREV_BUTTON', false);
+    }
+    if (!defined('HDQ_SECURE_ANSWERS')) {
+        define('HDQ_SECURE_ANSWERS', false);
+    }
 }
-if (!defined('HDQ_MAX_ANSWERS')) {
-    define('HDQ_MAX_ANSWERS', 10);
-}
-if (!defined('HDQ_REDIRECT')) {
-    define('HDQ_REDIRECT', true);
-}
-if (!defined('HDQ_FORCE_ORDER')) {
-    define('HDQ_FORCE_ORDER', false);
-}
-if (!defined('HDQ_PER_PAGE')) {
-    define('HDQ_PER_PAGE', 50);
-}
-if (!defined('HDQ_DISABLE_PREV_BUTTON')) {
-    define('HDQ_DISABLE_PREV_BUTTON', false);
-}
-if (!defined('HDQ_SECURE_ANSWERS')) {
-    define('HDQ_SECURE_ANSWERS', false);
-}
+add_action("init", "hdq_admin_init", 10);
 
 // custom quiz image sizes
 add_image_size('hd_qu_size2', 400, 400, true); // image-as-answer

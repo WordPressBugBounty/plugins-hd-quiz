@@ -133,13 +133,41 @@ function render_hdq_field_answers($field)
 
 function sanitize_hdq_field_answers($value)
 {
+    if (!is_array(($value))) {
+        $value = array();
+    }
+
+    $allowed_html = array(
+        'a' =>  array(
+            'id' => array(),
+            'class' => array(),
+            'href' => array(),
+            'title' => array(),
+            'target' => array()
+        ),
+        'p' => array(),
+        'span' => array(
+            'id' => array(),
+            'class' => array()
+        ),
+        'strong' => array(),
+        'em' => array(),
+        'code' => array(),
+        'sup' => array(),
+        'sub' => array(),
+        'small' =>  array(
+            'id' => array(),
+            'class' => array()
+        ),
+        'br' => array()
+    );
+
     // ENHANCE: Selected and $outcomes will need to become arrays to handle weighted values
     $array = array();
     foreach ($value as $v) {
-
         $value = "";
         if (isset($v["value"])) {
-            $value = sanitize_text_field($v["value"]);
+            $value = wp_kses($v["value"], $allowed_html);
         }
         $image = 0;
         if (isset($v["image"])) {
