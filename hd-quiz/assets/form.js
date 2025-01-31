@@ -37,7 +37,7 @@ export const form = {
 				mode: "textareas",
 				relative_urls: false,
 				remove_script_host: false,
-				convert_urls: true,
+				convert_urls: false,
 				browser_spellcheck: true,
 				entity_encoding: "raw",
 				keep_styles: false,

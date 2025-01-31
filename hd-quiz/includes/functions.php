@@ -287,7 +287,11 @@ function hdq_print_questions($data)
 
             // Paginate
             if ($question["paginate"] === "yes") {
-                hdq_print_jPaginate($data, $question);
+                if ($i !== 1) {
+                    hdq_print_jPaginate($data, $question);
+                } else {
+                    hdq_print_jPaginate($data, $question, true); // start quiz text
+                }
             }
             // used to add custom data attributes to questions
             // useful for custom question types
@@ -458,7 +462,7 @@ function hdq_print_results_personality($data)
 <?php
 }
 
-function hdq_print_jPaginate($data, $question)
+function hdq_print_jPaginate($data, $question, $startQuiz = false)
 {
     if (isset($data["quiz"]["timer"]) && intval($data["quiz"]["timer"]) >= 3 && $data["quiz"]['timer_per_question'] === "yes" && $question["question_type"] === "question_as_title") {
         return;
@@ -466,7 +470,7 @@ function hdq_print_jPaginate($data, $question)
 ?>
     <div class="hdq_jPaginate">
         <?php
-        if (!HDQ_DISABLE_PREV_BUTTON) {
+        if (!HDQ_DISABLE_PREV_BUTTON && !$startQuiz) {
         ?>
             <div class="hdq_hidden hdq_prev_button hdq_button hdq_kb" role="button" tabindex="0">
                 <?php echo $data["settings"]["translate_previous"]; ?>
@@ -475,7 +479,13 @@ function hdq_print_jPaginate($data, $question)
         }
         ?>
         <div class="hdq_next_button hdq_jPaginate_button hdq_button hdq_kb" role="button" tabindex="0">
-            <?php echo $data["settings"]["translate_next"]; ?>
+            <?php
+            if (!$startQuiz) {
+                echo $data["settings"]["translate_next"];
+            } else {
+                echo $data["settings"]["translate_quiz_start"];
+            }
+            ?>
         </div>
     </div>
 <?php
