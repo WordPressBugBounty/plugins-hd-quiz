@@ -115,18 +115,7 @@ class _hdq_settings
 						"placeholder": "",
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
-					},
-					{
-						"id": "enable_legacy_scroll",
-						"label": "Enable legacy scroll",
-						"required": "",
-						"default": "",
-						"tooltip": "",
-						"description": "Only enable this if you are having trouble with the quiz auto scrolling to the question. This can happen sometimes if your site has a very large header that covers part of a question.",
-						"placeholder": "",
-						"options": [{ "label": "Yes", "value": "yes" }],
-						"type": "radio"
-					}
+					}					
 				]
 			},			
 			{

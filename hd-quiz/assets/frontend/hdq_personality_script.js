@@ -475,6 +475,36 @@ const HDQ = {
 	},
 	submit: async function () {
 		const questions = HDQ.el.getElementsByClassName("hdq_question");
+
+		if (HDQ.VARS.quiz.force_answers === "yes") {
+			for (let i = 0; i < questions.length; i++) {
+				let s = HDQ.questions.mark(questions[i], false);
+				if (s !== null) {
+					s = Object.keys(s);
+				} else {
+					s = [null];
+				}
+				if (s.length == 0) {
+					questions[i].classList.remove("hdq_answer_required");
+					if (!s[2]) {
+						HDQ.paginate.removeAll();
+						HDQ.questions.showAll();
+
+						console.warn("You must fill out all questions");
+						questions[i].scrollIntoView({
+							behavior: "smooth",
+							block: "center",
+							inline: "nearest",
+						});
+						questions[i].classList.add("hdq_answer_required");
+
+						HDQ.el.getElementsByClassName("hdq_finish")[0].classList.remove("hdq_hidden");
+						return;
+					}
+				}
+			}
+		}
+
 		let results = {};
 		for (let i = 0; i < questions.length; i++) {
 			let s = HDQ.questions.mark(questions[i]);
@@ -506,7 +536,12 @@ const HDQ = {
 		console.log(score);
 
 		HDQ.paginate.removeAll();
-		HDQ.questions.showAll();
+
+		if (HDQ.VARS.quiz.hide_questions_after_completion === "yes") {
+			HDQ.questions.hideAll();
+		} else {
+			HDQ.questions.showAll();
+		}
 
 		HDQ.el.getElementsByClassName("hdq_finsh_button")[0].remove();
 		const results_el = HDQ.el.getElementsByClassName("hdq_results_wrapper")[0];

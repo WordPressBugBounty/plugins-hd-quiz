@@ -23,6 +23,8 @@ export const self = {
 		document.getElementById("hdq_content").scrollTo(0, 0);
 		document.getElementById("hdq_loading").classList.remove("active");
 
+		self.search.init();
+
 		_hd.init();
 		HDQ.form.createEditors();
 		HDQ.form.tabs();
@@ -71,6 +73,55 @@ export const self = {
 			HDQ.router.views.dashboard.get(null, []);
 		}
 		return data;
+	},
+	search: {
+		init: function () {
+			const questions = document.getElementsByClassName("hdq_quiz_item");
+			if (questions.length <= 25) {
+				return;
+			}
+
+			const searchEl = `<div id = "hdq_quiz_tabs_search_wrapper"><span class="hd_tooltip_item">?<span class="hd_tooltip"><div class="hd_tooltip_content">Press Enter to confirm your search for question titles. This feature is currently experimental.</div></span></span> <input type = "search" placeholder = "search..." id = "hdq_questions_search"/></div>`;
+			document.getElementById("hdq_quiz_tabs_labels").insertAdjacentHTML("beforeend", searchEl);
+
+			document.getElementById("hdq_questions_search").addEventListener("keyup", self.search.filter);
+			document.getElementById("hdq_questions_search").addEventListener("click", function () {
+				if (this.value !== "") {
+					this.value = "";
+					self.search.clear();
+				}
+			});
+		},
+		filter: function (ev) {
+			if (ev.keyCode !== 13) {
+				return;
+			}
+
+			const el = document.getElementById("hdq_questions_search");
+			if (el.value.length === 0) {
+				self.search.clear();
+				return;
+			}
+
+			if (el.value.length >= 3) {
+				const v = el.value.toLocaleUpperCase();
+				const questions = document.getElementsByClassName("hdq_quiz_item");
+				for (let i = 0; i < questions.length; i++) {
+					let title = questions[i].getElementsByTagName("span")[1].innerText.toLocaleUpperCase();
+					if (!title.includes(v)) {
+						questions[i].classList.add("hdq_hidden");
+					} else {
+						questions[i].classList.remove("hdq_hidden");
+					}
+				}
+			}
+		},
+		clear: function () {
+			const questions = document.getElementsByClassName("hdq_quiz_item");
+			for (let i = 0; i < questions.length; i++) {
+				questions[i].classList.remove("hdq_hidden");
+			}
+		},
 	},
 	question_order: {
 		init: function () {

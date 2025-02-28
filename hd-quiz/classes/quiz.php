@@ -392,6 +392,28 @@ class _hdq_quiz
 						"type": "radio"
 					},
 					{
+						"id": "force_answers",
+						"label": "Force users to answer all questions",
+						"required": "",
+						"default": "",
+						"tooltip": "",
+						"description": "This will check to make sure that all questions have been answered before submission. <small><strong>NOTE:</strong> will not work with timer-per-question. If user does not answer in time, that question is marked as incorrect.</small>",
+						"placeholder": "",
+						"options": [{ "label": "Yes", "value": "yes" }],
+						"type": "radio"
+					},
+					{
+						"id": "hide_questions_after_completion",
+						"label": "Hide questions after quiz completion",
+						"required": "",
+						"default": "",
+						"tooltip": "",
+						"description": "This will automatically hide the questions once a quiz has been completed so that only the results are shown.",
+						"placeholder": "",
+						"options": [{ "label": "Yes", "value": "yes" }],
+						"type": "radio"
+					},
+					{
 						"id": "rename_quiz",
 						"label": "Rename quiz",
 						"required": true,

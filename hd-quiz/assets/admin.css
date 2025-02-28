@@ -232,7 +232,7 @@
 
 .hdq_button_warning {
 	background-color: #ff6666;
-	color: #fff;
+	color: #000;
 }
 
 .hdq_button_warning .dashicons {
@@ -423,12 +423,37 @@
 	border-top-left-radius: 12px;
 }
 
-.hdq_quiz_tab:last-child {
+.hdq_quiz_tab:last-of-type {
+	border-top-right-radius: 12px;
+}
+
+.hdq_quiz_tab:not(:has(~ .hdq_quiz_tab)) {
 	border-top-right-radius: 12px;
 }
 
 .hdq_quiz_tab:not(.hdq_quiz_tab_active):hover {
 	background: #e3e3e3;
+}
+
+#hdq_quiz_tabs_search_wrapper {
+	text-align: right;
+	flex: 1;
+	justify-content: end;
+}
+
+#hdq_questions_search {
+	transition: all 350ms;
+	padding: 0.8em 0.6em;
+	border: 1px solid #ddd;
+	border-radius: 0.2em;
+	line-height: 1;
+	background-color: #fbfbfb;
+	margin: 0;
+	font-size: 0.8em;
+}
+
+.hdq_hidden {
+	display: none;
 }
 
 #hdq_quiz_tabs_content {
@@ -608,5 +633,9 @@
 	.hdq_table tr:first-child,
 	.hdq_table td {
 		display: block;
+	}
+
+	#hdq_quiz_tabs_search_wrapper {
+		display: none;
 	}
 }

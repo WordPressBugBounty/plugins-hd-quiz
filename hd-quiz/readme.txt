@@ -3,7 +3,7 @@ Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
 Tested up to: 6.7.1
-Stable tag: 2.0.4
+Stable tag: 2.0.5
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -153,6 +153,12 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.0.5 =
+* New Personality Quiz features
+* Hide questions after quiz completion
+* Force users to answer all questions
+* Question drag-n-drop fix for Firefox
+
 = 2.0.4 =
 * If first question is Paginate, replace with Quiz Start button
 * Fix WP bug to allow embedding of audio/video
@@ -355,6 +361,7 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.0.4 =
-* If first question is Paginate, replace with Quiz Start button
-* Fix WP bug to allow embedding of audio/video
+= 2.0.5 =
+* [personality] Hide questions after quiz completion
+* [personality] Force users to answer all questions
+* Question drag-n-drop fix for Firefox
