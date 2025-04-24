@@ -391,8 +391,25 @@ const HDQ = {
 		init: function () {
 			if (HDQ.VARS.settings.allow_social_media === "yes" && HDQ.VARS.quiz.share_quiz_results === "yes") {
 				HDQ.share.twitter();
+				HDQ.share.bluesky();
 				HDQ.share.other();
+
+				if (HDQ.VARS.settings.enhanced_facebook === "yes") {
+					HDQ.share.facebook();
+				}
 			}
+		},
+		facebook: function () {
+			let baseURL = window.location.origin + "/hd-quiz/share";
+			baseURL += "?quiz_id=" + HDQ.VARS.quiz.quiz_id;
+			baseURL += "&permalink=" + HDQ.VARS.quiz.permalink;
+			baseURL += "&score=" + HDQ.VARS.hdq_score;
+			baseURL += "&redirect=1";
+			const el = document.getElementsByClassName("hdq_facebook");
+			if (el.length === 0) {
+				return;
+			}
+			el[0].setAttribute("href", "https://www.facebook.com/sharer/sharer.php?u=" + baseURL);
 		},
 		twitter: function () {
 			let baseURL = "https://twitter.com/intent/tweet";
@@ -409,13 +426,34 @@ const HDQ = {
 			text = "&text=" + encodeURI(text);
 			let url = "&url=" + encodeURI(HDQ.VARS.quiz.permalink);
 			let hashtags = "&hashtags=hdquiz";
-
 			let shareLink = baseURL + text + url + hashtags;
-			HDQ.el.getElementsByClassName("hdq_twitter")[0].setAttribute("href", shareLink);
+			const el = HDQ.el.getElementsByClassName("hdq_twitter");
+			if (el.length === 0) {
+				return;
+			}
+			el[0].setAttribute("href", shareLink);
+		},
+		bluesky: function () {
+			let baseURL = "https://bsky.app/intent/compose";
+			let text = HDQ.VARS.settings.share_text_personality;
+			let score = HDQ.VARS.hdq_score;
+			text = text.replaceAll("%score%", score);
+			text = text.replaceAll("%quiz%", HDQ.VARS.quiz_name);
+			text = text + " " + encodeURI(HDQ.VARS.quiz.permalink) + " #hdquiz";
+			const shareLink = baseURL + "?text=" + encodeURI(text);
+			const el = HDQ.el.getElementsByClassName("hdq_bluesky");
+			if (el.length === 0) {
+				return;
+			}
+			el[0].setAttribute("href", shareLink);
 		},
 		other: function () {
 			// for the most part, only available on movile devices
-			const el = document.getElementsByClassName("hdq_share_other")[0];
+			let el = HDQ.el.getElementsByClassName("hdq_share_other");
+			if (el.length === 0) {
+				return;
+			}
+			el = el[0];
 			try {
 				if (!navigator.canShare) {
 					el.remove();
@@ -472,6 +510,22 @@ const HDQ = {
 		});
 		res = await res.text();
 		console.log(res);
+	},
+	redirect: {
+		init: async function () {
+			if (!HDQ.VARS.quiz.quiz_redirect_url || HDQ.VARS.quiz.quiz_redirect_url == "") {
+				return;
+			}
+			HDQ.redirect.delay();
+		},
+		delay: function () {
+			let timeout = 0;
+			timeout = parseInt(HDQ.VARS.quiz.quiz_redirect_delay) + 1;
+			timeout = timeout * 1000;
+			setTimeout(() => {
+				window.location.href = HDQ.VARS.quiz.quiz_redirect_url;
+			}, timeout);
+		},
 	},
 	submit: async function () {
 		const questions = HDQ.el.getElementsByClassName("hdq_question");
@@ -569,7 +623,7 @@ const HDQ = {
 			await HDQ.submitAction(HDQ.VARS.hdq_submit[i]);
 		}
 
-		console.log(results);
+		HDQ.redirect.init();
 	},
 };
 

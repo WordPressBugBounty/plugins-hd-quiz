@@ -117,7 +117,7 @@
 .hdq_share {
 	text-align: center;
 	background: rgba(0, 0, 0, 0.1);
-	padding: 22px;
+	padding: 12px;
 	display: flex;
 	justify-content: center;
 }
@@ -144,6 +144,12 @@
 
 .hdq_quiz_wrapper img {
 	max-width: 100%;
+	height: auto !important;
+}
+
+.hdq_share img {
+	max-width: 100%;
+	width: 40px;
 	height: auto !important;
 }
 

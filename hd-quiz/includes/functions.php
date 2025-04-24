@@ -364,32 +364,21 @@ function hdq_print_results_general($data)
         ?>
             <div class="hdq_share">
                 <div class="hdq_social_icon">
-                    <a title="share quiz on Facebook" href="http://www.facebook.com/sharer/sharer.php?u=<?php echo the_permalink(); ?>&amp;title=Quiz" target="_blank" class="hdq_facebook">
-                        <img src="<?php echo plugins_url('../assets/images/fbshare.png', __FILE__); ?>" alt="Share your score!">
+                    <a title="share quiz on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo the_permalink(); ?>&amp;title=Quiz" target="_blank" class="hdq_facebook">
+                        <img src="<?php echo plugins_url('../assets/images/fb_share.png', __FILE__); ?>" alt="Share your score!">
                     </a>
                 </div>
-
                 <div class="hdq_social_icon">
-                    <?php
-                    if (HDQ_TWITTER_SHARE_ICON) {
-                    ?>
-                        <a href="#" target="_blank" class="hdq_twitter" title="X, formerly Twitter"><img src="<?php echo plugins_url('../assets/images/twshare.png', __FILE__); ?>" alt="Tweet your score!"></a>
-                    <?php
-                    } else {
-                    ?>
-                        <a href="#" target="_blank" class="hdq_twitter" title="X, formerly Twitter"><img src="<?php echo plugins_url('../assets/images/xshare.png', __FILE__); ?>" alt="Tweet your score!"></a>
-                    <?php
-                    }
-                    ?>
+                    <a href="#" target="_blank" class="hdq_twitter" title="X, formerly Twitter"><img src="<?php echo plugins_url('../assets/images/x_share.png', __FILE__); ?>" alt="Tweet your score!"></a>
                 </div>
-
                 <div class="hdq_social_icon">
-                    <a class="hdq_share_other"><img src="<?php echo plugins_url('../assets/images/share.png', __FILE__); ?>" alt="Share to other"></a>
+                    <a href="#" target="_blank" class="hdq_bluesky" title="Bluesky"><img src="<?php echo plugins_url('../assets/images/bluesky_share.png', __FILE__); ?>" alt="Tweet your score!"></a>
                 </div>
-
+                <div class="hdq_social_icon">
+                    <a class="hdq_share_other"><img src="<?php echo plugins_url('../assets/images/share_all.png', __FILE__); ?>" alt="Share to other"></a>
+                </div>
                 <?php do_action("hdq_share_content", $data["quiz_id"]); ?>
             </div>
-
         <?php
         }
 
@@ -425,32 +414,21 @@ function hdq_print_results_personality($data)
         ?>
             <div class="hdq_share">
                 <div class="hdq_social_icon">
-                    <a title="share quiz on Facebook" href="http://www.facebook.com/sharer/sharer.php?u=<?php echo the_permalink(); ?>&amp;title=Quiz" target="_blank" class="hdq_facebook">
-                        <img src="<?php echo plugins_url('../assets/images/fbshare.png', __FILE__); ?>" alt="Share your score!">
+                    <a title="share quiz on Facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?php echo the_permalink(); ?>&amp;title=Quiz" target="_blank" class="hdq_facebook">
+                        <img src="<?php echo plugins_url('../assets/images/fb_share.png', __FILE__); ?>" alt="Share your score!">
                     </a>
                 </div>
-
                 <div class="hdq_social_icon">
-                    <?php
-                    if (HDQ_TWITTER_SHARE_ICON) {
-                    ?>
-                        <a href="#" target="_blank" class="hdq_twitter" title="X, formerly Twitter"><img src="<?php echo plugins_url('../assets/images/twshare.png', __FILE__); ?>" alt="Tweet your score!"></a>
-                    <?php
-                    } else {
-                    ?>
-                        <a href="#" target="_blank" class="hdq_twitter" title="X, formerly Twitter"><img src="<?php echo plugins_url('../assets/images/xshare.png', __FILE__); ?>" alt="Tweet your score!"></a>
-                    <?php
-                    }
-                    ?>
+                    <a href="#" target="_blank" class="hdq_twitter" title="X, formerly Twitter"><img src="<?php echo plugins_url('../assets/images/x_share.png', __FILE__); ?>" alt="Tweet your score!"></a>
                 </div>
-
                 <div class="hdq_social_icon">
-                    <a class="hdq_share_other"><img src="<?php echo plugins_url('../assets/images/share.png', __FILE__); ?>" alt="Share to other"></a>
+                    <a href="#" target="_blank" class="hdq_bluesky" title="Bluesky"><img src="<?php echo plugins_url('../assets/images/bluesky_share.png', __FILE__); ?>" alt="Tweet your score!"></a>
                 </div>
-
+                <div class="hdq_social_icon">
+                    <a class="hdq_share_other"><img src="<?php echo plugins_url('../assets/images/share_all.png', __FILE__); ?>" alt="Share to other"></a>
+                </div>
                 <?php do_action("hdq_share_content", $data["quiz_id"]); ?>
             </div>
-
         <?php
         }
 
@@ -690,6 +668,33 @@ function hdq_encodeURIComponent($str)
     $revert = array('%21' => '!', '%2A' => '*', '%27' => "'", '%28' => '(', '%29' => ')');
     return strtr(rawurlencode($str), $revert);
 }
+
+/* Experimental Facebook share */
+function hdq_load_hd_template($template)
+{
+    global $wp;
+    $request = explode('/', $wp->request);
+    if (current($request) == "hd-quiz" && !is_page('hd-quiz')) {
+        global $wp_query;
+        $wp_query->is_404 = false;
+        status_header(200);
+        add_filter("wp_title", function ($title) {
+            return "Harmonic Design | Professional Web Development";
+        });
+        return dirname(__FILE__) . '/share-page.php';
+    }
+    return $template;
+}
+add_filter('template_include', 'hdq_load_hd_template');
+
+
+// Makes sure that any request responds with a proper 200 http code
+function hdq_rewrites_init()
+{
+    add_rewrite_endpoint('hd-quiz', EP_PERMALINK);
+    add_rewrite_rule('hd-quiz/(.+)', 'index.php', 'top');
+}
+add_action('init', 'hdq_rewrites_init');
 
 /* Question render functions
 ------------------------------------------------------- */

@@ -2,8 +2,8 @@
 Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
-Tested up to: 6.7.1
-Stable tag: 2.0.5
+Tested up to: 6.7.2
+Stable tag: 2.0.6
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -69,6 +69,7 @@ HD Quiz has *so many* cool features, settings, and options, that I cannot possib
 - Custom pass percent
 - Custom result text (based on if the user passed or failed the quiz)
 - Automatically hide the questions on quiz completion
+- Redirect on completion
 - Allow "authors" to create quizzes
 - **free addon to save results of quizzes**
 - and I'm sure a ton of other things that I can't even remember
@@ -124,15 +125,6 @@ Once installed, you will need to create your first quiz by going to HD Quiz, the
 
 == Frequently Asked Questions ==
 
-
-= Using an image already in my library =
-
-WordPress will NOT create the new thumbnail size for images that existed before the installation of HD Quiz, only new ones. This is likely because on larger sites, this would take up vast amounts of server resources.
-
-If you do not wish to simply re-upload any desired image from your library, then I would recommend using the [Regenerate Thumbnails](https://wordpress.org/plugins/regenerate-thumbnails/ "Regenerate Thumbnails") plugin (over 1 Million active installs). It will go through and recreate thumbnails for every single image in your library, ensuring that all images in your library can be used with HD Quiz.
-
-With that said, I do, however, have plans to integrate a solution that will work with images uploaded before the installation of HD Quiz.
-
 = What's the difference between WP Pagination and jQuery Pagination? Which should I use? =
 
 Unless you are a unique situation, I'd almost always recommend using jQuery Pagination as it provides more control for you and a better experience for your users. WP Pagination should only be used if you are trying to increase your overall page views for ad revenue or something similar.
@@ -153,6 +145,11 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.0.6 =
+* New enhanced Facebook sharing. Experimental feature.
+* New share icons to make translation agnostic since old ones had the word Share as part of the image
+* New Redirect URL and Redirect Delay options
+
 = 2.0.5 =
 * New Personality Quiz features
 * Hide questions after quiz completion
@@ -361,7 +358,7 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.0.5 =
-* [personality] Hide questions after quiz completion
-* [personality] Force users to answer all questions
-* Question drag-n-drop fix for Firefox
+= 2.0.6 =
+* New Redirect URL and Redirect Delay options
+* Enhanced Facebook share (experimental). Enable from HD Quiz settings page.
+* New share icons to make translation agnostic

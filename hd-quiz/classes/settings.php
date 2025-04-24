@@ -45,6 +45,16 @@ class _hdq_settings
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
 					},
+					{
+						"id": "enhanced_facebook",
+						"label": "Enable enhanced Facebook sharing",
+						"required": "",
+						"tooltip": "",
+						"description": "This is an *experimental feature* and will not work for all users. It works by creating a dedicated share page just for Facebook. Do not ask for support for this feature.",
+						"placeholder": "",
+						"options": [{ "label": "Yes", "value": "yes" }],
+						"type": "radio"
+					},
 					{ "id": "twitter_handle", "label": "Twitter/X handle", "required": "", "default": "", "placeholder": "", "description": "do NOT include the @ symbol", "tooltip": "The sent tweet will mention your handle", "prefix": "", "postfix": "", "type": "text" }
 				]
 			},

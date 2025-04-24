@@ -85,7 +85,35 @@ class _hdq_quiz
 						"type": "radio"
 					},
 					{ "id": "quiz_pass_content", "label": "Quiz pass content", "media": "yes", "default": "", "required": "", "tooltip": "This content will show once the quiz has been completed and the user has passed the quiz", "description": "", "type": "editor" },
-					{ "id": "quiz_fail_content", "label": "Quiz fail content", "media": "yes", "default": "", "required": "", "tooltip": "This content will show once the quiz has been completed and the user has failed the quiz", "description": "", "type": "editor" }
+					{ "id": "quiz_fail_content", "label": "Quiz fail content", "media": "yes", "default": "", "required": "", "tooltip": "This content will show once the quiz has been completed and the user has failed the quiz", "description": "", "type": "editor" },
+					{
+						"id": "quiz_redirect_url",
+						"label": "Quiz redirect URL",
+						"placeholder": "",
+						"type": "website",
+						"description": "If you want to automatically redirect to another page on quiz completion."
+					},
+					{
+						"id": "quiz_redirect_delay",
+						"label": "Quiz redirect delay",
+						"default": "0",
+						"tooltip": "",
+						"description": "How many seconds to wait after results to redirect.",
+						"placeholder": "",
+						"attributes": [
+							{
+								"name": "min",
+								"value": 0
+							},
+							{
+								"name": "max",
+								"value": 100
+							}
+						],
+						"prefix": "",
+						"postfix": "seconds",
+						"type": "integer"
+					}
 				]
 			}
 		]
@@ -413,6 +441,34 @@ class _hdq_quiz
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
 					},
+					{
+						"id": "quiz_redirect_url",
+						"label": "Quiz redirect URL",
+						"placeholder": "",
+						"type": "website",
+						"description": "If you want to automatically redirect to another page on quiz completion."
+					},
+					{
+						"id": "quiz_redirect_delay",
+						"label": "Quiz redirect delay",
+						"default": "0",
+						"tooltip": "",
+						"description": "How many seconds to wait after results to redirect.",
+						"placeholder": "",
+						"attributes": [
+							{
+								"name": "min",
+								"value": 0
+							},
+							{
+								"name": "max",
+								"value": 100
+							}
+						],
+						"prefix": "",
+						"postfix": "seconds",
+						"type": "integer"
+					},					
 					{
 						"id": "rename_quiz",
 						"label": "Rename quiz",

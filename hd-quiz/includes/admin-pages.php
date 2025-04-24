@@ -7,8 +7,8 @@ function hdq_main_page()
     wp_enqueue_style("hdfields", plugins_url('../hdfields/style.css', __FILE__), array(), HDQ_PLUGIN_VERSION);
     wp_enqueue_script("hdfields", plugins_url('../hdfields/script.js', __FILE__), array(),  HDFIELDS_VERSION);
     wp_enqueue_style("hdq_admin", plugins_url('../assets/admin.css', __FILE__), array(), HDQ_PLUGIN_VERSION);
-    // wp_enqueue_script('hdq_admin', plugins_url('../assets/admin_bundled.js', __FILE__), array(), HDQ_PLUGIN_VERSION);
-    wp_enqueue_script_module('hdq_admin', plugins_url('../assets/admin.js', __FILE__), array(), HDQ_PLUGIN_VERSION);
+    wp_enqueue_script('hdq_admin', plugins_url('../assets/admin_bundled.js', __FILE__), array(), HDQ_PLUGIN_VERSION);
+    // wp_enqueue_script_module('hdq_admin', plugins_url('../assets/admin.js', __FILE__), array(), HDQ_PLUGIN_VERSION);
 
     $hdq_version = sanitize_text_field(get_option('HDQ_PLUGIN_VERSION'));
     if (HDQ_PLUGIN_VERSION != $hdq_version) {

@@ -5,12 +5,10 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.0.5
+    * Version: 2.0.6
 	* Text Domain: hd-quiz
 	* Domain Path: /languages
 */
-
-/* RECOMPILE BUNDLED */
 
 // Future updates
 // * Next/Prev question when admin editing
@@ -25,16 +23,13 @@ if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.0.5');
+    define('HDQ_PLUGIN_VERSION', '2.0.6');
 }
 
 // Settings that a power user might want to change,
 // but that I don't want to have a dedicated setting for
 function hdq_admin_init()
 {
-    if (!defined('HDQ_TWITTER_SHARE_ICON')) {
-        define('HDQ_TWITTER_SHARE_ICON', false);
-    }
     if (!defined('HDQ_MAX_ANSWERS')) {
         define('HDQ_MAX_ANSWERS', 10);
     }
