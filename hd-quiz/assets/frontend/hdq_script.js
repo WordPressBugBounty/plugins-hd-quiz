@@ -912,8 +912,8 @@ const HDQ = {
 
 		HDQ.paginate.removeAll();
 
-		for (let i = 0; i < HDQ.VARS.hdq_submit.length; i++) {
-			await HDQ.submitAction(HDQ.VARS.hdq_submit[i]);
+		for (let i = 0; i < HDQ.VARS.hdq_before_submit.length; i++) {
+			await HDQ.submitAction(HDQ.VARS.hdq_before_submit[i]);
 		}
 
 		let score = [0, 0]; // x / y
@@ -963,6 +963,10 @@ const HDQ = {
 		result_el.innerHTML = `${score[0]} / ${score[1]}  - <span class = "hdq_result_percent">${percent.toFixed(2).replace(/[.,]00$/, "")}%</span>`;
 
 		HDQ.el.getElementsByClassName("hdq_loading_bar")[0].classList.add("hdq_animate");
+
+		for (let i = 0; i < HDQ.VARS.hdq_submit.length; i++) {
+			await HDQ.submitAction(HDQ.VARS.hdq_submit[i]);
+		}
 
 		setTimeout(function () {
 			results.scrollIntoView({

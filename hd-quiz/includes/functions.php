@@ -200,6 +200,7 @@ function hdq_get_local_vars($quiz, $settings)
     $data = array(
         "hdq_init" => array(), // actions
         "hdq_submit" => array(), // actions
+        "hdq_before_submit" => array(), // actions
         "quiz" => array(
             "ajax_url" => admin_url('admin-ajax.php'),
             "permalink" => get_the_permalink(),
@@ -236,6 +237,7 @@ function hdq_get_local_vars($quiz, $settings)
     $object = json_decode(json_encode($data), FALSE);
 
     do_action("hdq_submit", $object); // add functions to quiz complete
+    do_action("hdq_before_submit", $object); // add functions to quiz complete, but before submit
     do_action("hdq_init", $object); // add functions to quiz init
 
     return $object;
