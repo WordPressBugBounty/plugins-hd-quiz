@@ -2,8 +2,8 @@
 Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
-Tested up to: 6.7.2
-Stable tag: 2.0.6
+Tested up to: 6.8.2
+Stable tag: 2.0.8
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -145,6 +145,12 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.0.8 =
+* Changed the `on_submit` priority to make certain serverside validations easier
+
+= 2.0.7 =
+* Bugfix: Personality quiz names when name has certain special characters
+
 = 2.0.6 =
 * New enhanced Facebook sharing. Experimental feature.
 * New share icons to make translation agnostic since old ones had the word Share as part of the image
@@ -358,7 +364,5 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.0.6 =
-* New Redirect URL and Redirect Delay options
-* Enhanced Facebook share (experimental). Enable from HD Quiz settings page.
-* New share icons to make translation agnostic
+= 2.0.8 =
+* Changed `on_submit` priority

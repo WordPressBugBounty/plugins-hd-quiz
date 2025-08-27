@@ -690,6 +690,9 @@ const HDQ = {
 				answers = decodeURIComponent(answers);
 				answers = HDQ.answers.text_based_answer.decodeHtml(answers);
 				answers = JSON.parse(answers);
+				for (let i = 0; i < answers.length; i++) {
+					answers[i] = answers[i].toLocaleUpperCase().trim();
+				}
 				score = HDQ.answers.text_based_answer.isCorrect(answers, value);
 
 				if (highlight) {
@@ -803,7 +806,7 @@ const HDQ = {
 				return;
 			}
 			el = el[0];
-			
+
 			try {
 				if (!navigator.canShare) {
 					el.remove();
@@ -909,6 +912,10 @@ const HDQ = {
 
 		HDQ.paginate.removeAll();
 
+		for (let i = 0; i < HDQ.VARS.hdq_submit.length; i++) {
+			await HDQ.submitAction(HDQ.VARS.hdq_submit[i]);
+		}
+
 		let score = [0, 0]; // x / y
 		for (let i = 0; i < questions.length; i++) {
 			let s = HDQ.questions.mark(questions[i], true);
@@ -925,7 +932,11 @@ const HDQ = {
 			score[1] = parseInt(score[1]) + parseInt(total_questions);
 		}
 
-		HDQ.VARS.hdq_score = score;
+		if (typeof HDQ.VARS.hdq_score === "undefined") {
+			HDQ.VARS.hdq_score = score;
+		} else {
+			score = HDQ.VARS.hdq_score;
+		}
 
 		let status = false;
 		let percent = (score[0] / score[1]) * 100;
@@ -960,10 +971,6 @@ const HDQ = {
 				inline: "nearest",
 			});
 		}, 1200);
-
-		for (let i = 0; i < HDQ.VARS.hdq_submit.length; i++) {
-			await HDQ.submitAction(HDQ.VARS.hdq_submit[i]);
-		}
 
 		HDQ.redirect.init();
 	},

@@ -473,7 +473,7 @@ class _hdq_quiz
 						"id": "rename_quiz",
 						"label": "Rename quiz",
 						"required": true,
-						"default": "' . esc_attr(trim(addslashes($this->quiz_name))) . '",						
+						"default": "' . esc_attr(trim($this->quiz_name)) . '",					
 						"placeholder": "",
 						"type": "text"
 					}
