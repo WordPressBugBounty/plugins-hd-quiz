@@ -118,6 +118,9 @@ add_action("wp_ajax_hdq_get_view_question", "hdq_get_view_question");
 
 function hdq_get_question_type()
 {
+    if (!hdq_user_permission()) {
+        die();
+    }
     $question_type = "";
     if (isset($_POST["question_type"])) {
         $question_type = sanitize_text_field($_POST["question_type"]);
@@ -127,7 +130,7 @@ function hdq_get_question_type()
     if (isset($_POST["quiz_id"])) {
         $quiz_id = intval($_POST["quiz_id"]);
     }
-    
+
     $question_id = 0;
     if (isset($_POST["question_id"])) {
         $question_id = intval($_POST["question_id"]);
