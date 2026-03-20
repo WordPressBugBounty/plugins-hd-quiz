@@ -272,7 +272,7 @@ class _hdq_quiz
 						"required": "",
 						"default": "",
 						"tooltip": "",
-						"description": "Please note that randomizing the questions is NOT possible WP Pagination is enabled. <small>and also not a good idea to use this if you are using the \"questions as title\" option for any questions attached to this quiz</small>",
+						"description": "Please note that randomizing the questions is NOT possible if WP Pagination is enabled. <small>and also not a good idea to use this if you are using the \"questions as title\" option for any questions attached to this quiz</small>",
 						"placeholder": "",
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
@@ -300,6 +300,17 @@ class _hdq_quiz
 						"postfix": "questions",
 						"options": "",
 						"type": "integer"
+					},
+					{
+						"id": "paginate_all",
+						"label": "Force paginate all questions",
+						"required": "",
+						"default": "",
+						"tooltip": "",
+						"description": "Enabling this will ignore the Paginate setting for each question, and force it on for all.",
+						"placeholder": "",
+						"options": [{ "label": "Yes", "value": "yes" }],
+						"type": "radio"
 					},
 					{
 						"id": "wp_pagination",
@@ -620,7 +631,7 @@ class _hdq_quiz
 			return $res;
 		}
 
-		$res = $this->validateAccess($this->data);
+		$res = $this->validateAccess();
 
 		if ($res !== false) {
 			return $res;
@@ -857,7 +868,7 @@ class _hdq_quiz
 
 		$this->term = get_term($this->quiz_id, "quiz");
 
-		$res = $this->validateAccess($this->data);
+		$res = $this->validateAccess();
 		if ($res !== false) {
 			return $res;
 		}

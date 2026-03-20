@@ -85,8 +85,9 @@ function hdq_get_quiz($quiz_id)
 function hdq_get_question($question_id, $quiz_id)
 {
     $question_id = intval($question_id);
-    $quiz = new _hdq_question($quiz_id, $question_id, true);
-    return $quiz->data;
+    $question = new _hdq_question($quiz_id, $question_id, true);
+    $data = apply_filters("hdq_filter_question_data", $question->data, $question_id, $quiz_id);
+    return $data;
 }
 
 function hdq_get_content_filter()
@@ -269,7 +270,7 @@ function hdq_print_questions($data)
                 'terms' => $data["quiz_id"],
             ),
         ),
-        'pagination' => $data["wp_paginate"], // true or false
+        'pagination' => $data["wp_paginate"],
         'posts_per_page' => $data["per_page"], // also used for the pool of questions
         'paged' => $paged,
         'orderby' => $data["question_order"], // defaults to menu_order
@@ -288,13 +289,22 @@ function hdq_print_questions($data)
             $question = hdq_get_question(get_the_ID(), $data["quiz_id"]);
 
             // Paginate
-            if ($question["paginate"] === "yes") {
+            if ($data["quiz"]["paginate_all"] === "yes") {
                 if ($i !== 1) {
                     hdq_print_jPaginate($data, $question);
                 } else {
                     hdq_print_jPaginate($data, $question, true); // start quiz text
                 }
+            } else {
+                if ($question["paginate"] === "yes") {
+                    if ($i !== 1) {
+                        hdq_print_jPaginate($data, $question);
+                    } else {
+                        hdq_print_jPaginate($data, $question, true); // start quiz text
+                    }
+                }
             }
+            
             // used to add custom data attributes to questions
             // useful for custom question types
             $extra = apply_filters('hdq_extra_question_data', array(), $question, $data["quiz_id"]);
@@ -303,7 +313,7 @@ function hdq_print_questions($data)
                 $extra_data = esc_attr("data-" . sanitize_text_field($k)) . ' = "' . esc_attr(sanitize_text_field($d)) . '" ';
             }
 ?>
-            <div class="hdq_question" <?php echo $extra_data; ?> data-type="<?php echo esc_attr($question["question_type"]); ?>" id="hdq_question_<?php echo $question["question_id"]; ?>" data-weight="1">
+            <div class="hdq_question" <?php echo $extra_data; ?> data-type="<?php echo esc_attr($question["question_type"]); ?>" id="hdq_question_<?php echo esc_attr($question["question_id"]); ?>">
                 <?php
                 hdq_print_question_featured_image($question);
                 if ($question["before_question_content"] != "") {

@@ -121,9 +121,17 @@ function hdq_get_question_type()
     if (!hdq_user_permission()) {
         die();
     }
+
     $question_type = "";
     if (isset($_POST["question_type"])) {
         $question_type = sanitize_text_field($_POST["question_type"]);
+    }
+
+    $weighted = false;
+    if (isset($_POST["weighted"])) {
+        if ($_POST["weighted"] == "true") {
+            $weighted = true;
+        }
     }
 
     $quiz_id = 0;
@@ -137,7 +145,7 @@ function hdq_get_question_type()
     }
 
     $question = new _hdq_question($quiz_id, $question_id, true);
-    $question->getQuestionType($question_type);
+    $question->getQuestionType($question_type, $weighted);
     die();
 }
 add_action("wp_ajax_hdq_get_question_type", "hdq_get_question_type");

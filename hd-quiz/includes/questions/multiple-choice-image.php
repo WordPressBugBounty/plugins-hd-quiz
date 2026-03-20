@@ -7,6 +7,8 @@ foreach ($answers as $k => $answer) {
     if (!HDQ_SECURE_ANSWERS) {
         if ($answer["selected"] === "yes") {
             $selected = 1;
+        } else {
+            $selected = intval($answer["selected"]);
         }
     }
 ?>

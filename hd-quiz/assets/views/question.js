@@ -75,11 +75,16 @@ export const self = {
 			self.fieldAnswers.init();
 		},
 		onChangeQuestionType: function () {
-			// when changing question type, get template data
 			const questionTypeEl = document.getElementById("question_type");
 			if (!questionTypeEl) {
 				return;
 			}
+
+			document.getElementById("weighted0").addEventListener("change", async function () {
+				let event = new Event("change");
+				questionTypeEl.dispatchEvent(event);
+			});
+
 			questionTypeEl.addEventListener("change", async function () {
 				self.answers.changeQuestionType(this);
 			});
@@ -107,13 +112,13 @@ export const self = {
 
 			let data = {
 				question_type: type,
+				weighted: document.getElementById("weighted0").checked,
 				question_id: self.answers.data.question_id,
 				quiz_id: self.answers.data.quiz_id,
 			};
 
 			// store current answer data
 			self.answers.data.answers = await self.answers.getAnswerData();
-
 			// update with new question type content
 			data = await fetcher("hdq_get_question_type", data);
 			if (data.status && data.status === "success") {
@@ -167,6 +172,8 @@ export const self = {
 			return [answers_clean, true];
 		},
 		setAnswerData: async function () {
+			return; // disable for weighted questions to avoid conflicts
+
 			let answers = self.answers.data.answers[0];
 			if (answers.length === 0) {
 				return;
@@ -183,7 +190,7 @@ export const self = {
 						} else {
 							if (items[ii].getAttribute("data-value")) {
 								items[ii].setAttribute("data-value", answers[i][type]);
-								if (type === "image") {
+								if (type === "image" && answers[i].imageURL !== "") {
 									items[ii].innerHTML = "";
 									items[ii].insertAdjacentElement("beforeend", answers[i].imageURL);
 									items[ii].nextElementSibling.classList.add("active");

@@ -9,6 +9,7 @@ class _hdq_question
     public $quiz = array(); // store quiz settings (needed for outcomes)
     public $quiz_type = "general";
     public $max_answers = 10;
+    public $weighted = false;
 
     // looks for method first, 
     // then looks for function named 
@@ -96,17 +97,28 @@ class _hdq_question
 		"id": "Main",
 		"children": [
             {
-                "column_type": "1-1",
+                "column_type": "1-1-1",
                 "type": "column",
                 "children": [
                     { "id": "question_type", "label": "Question type", "required": "true", "default": "", "tooltip": "", "description": "", "placeholder": "", "prefix": "", "postfix": "", "options": ' . $question_types . ', "type": "select" },
-                     {
+                    {
 						"id": "paginate",
 						"label": "Paginate",
 						"required": "",
 						"default": "",
 						"tooltip": "",
 						"tooltip": "Start a new page with this question. User will need to select \"next\" to see this question or ones below it",
+						"placeholder": "",
+						"options": [{ "label": "Yes", "value": "yes" }],
+						"type": "radio"
+					},
+                    {
+						"id": "weighted",
+						"label": "Weighted answers",
+						"required": "",
+						"default": "",
+						"tooltip": "",
+						"tooltip": "If enabled, each answer can be given its own value - even negative points. Not all question types are compatible with this feature.",
 						"placeholder": "",
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
@@ -183,9 +195,11 @@ class _hdq_question
         $this->fields = $fields;
     }
 
-    public function getQuestionType($question_type)
+    public function getQuestionType($question_type, $weighted)
     {
         $question_type = sanitize_text_field($question_type);
+        $this->weighted = $weighted;
+
         if (method_exists($this, $question_type)) {
             $this->$question_type($this->data["question_answers"]);
         } else {
@@ -364,7 +378,7 @@ class _hdq_question
             return $res;
         }
 
-        $res = $this->validateAccess($this->data);
+        $res = $this->validateAccess();
 
         if ($res !== false) {
             return $res;
@@ -396,7 +410,7 @@ class _hdq_question
             return $res;
         }
 
-        $res = $this->validateAccess($this->data);
+        $res = $this->validateAccess();
         if ($res !== false) {
             return $res;
         }
@@ -503,7 +517,7 @@ class _hdq_question
             return $res;
         }
 
-        $res = $this->validateAccess($this->data);
+        $res = $this->validateAccess();
         if ($res !== false) {
             return $res;
         }

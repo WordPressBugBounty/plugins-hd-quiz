@@ -372,7 +372,6 @@ const HDQ = {
 		mark: function (question, highlight = true) {
 			const type = question.getAttribute("data-type");
 			let score = HDQ.answers[type].mark(question, highlight);
-
 			if (!highlight) {
 				return score;
 			}
@@ -535,13 +534,16 @@ const HDQ = {
 			},
 			mark: function (question, highlight = true) {
 				let score = 0;
+				let max = 0;
 				let answered = false;
 				const answers = question.getElementsByClassName("hdq_option");
 				for (let i = 0; i < answers.length; i++) {
 					if (answers[i].checked) {
-						score = answers[i].value;
+						score = parseInt(answers[i].value);
 						answered = true;
-						break;
+					}
+					if (parseInt(answers[i].value) > max) {
+						max = parseInt(answers[i].value);
 					}
 				}
 
@@ -552,7 +554,7 @@ const HDQ = {
 								if (parseInt(answers[i].value) > 0) {
 									answers[i].parentElement.parentElement.parentElement.classList.add("hdq_correct");
 								}
-								if (parseInt(answers[i].value) == 0) {
+								if (parseInt(answers[i].value) <= 0) {
 									answers[i].parentElement.parentElement.parentElement.classList.add("hdq_wrong");
 								}
 							} else {
@@ -565,7 +567,7 @@ const HDQ = {
 						}
 					}
 				}
-				return [score, 1, answered];
+				return [score, max, answered];
 			},
 		},
 		multiple_choice_image: null,

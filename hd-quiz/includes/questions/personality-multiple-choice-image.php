@@ -9,10 +9,17 @@ foreach ($answers as $k => $answer) {
     foreach ($answer as $k => $value) {
         if ($k !== "selected" && str_contains($k, "selected")) {
             if ($value === "yes") {
-                array_push($selected, $k);
+                $value = 1;
+            } else {
+                $value = intval($value);
             }
+
+            if (!isset($selected[$k])) {
+                $selected[$k] = 0;
+            }
+            $selected[$k] = $selected[$k] + $value;
         }
-    }
+    };
     $selected = json_encode($selected);
 ?>
     <div class="hdq_row hdq_row_image">

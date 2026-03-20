@@ -5,10 +5,12 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.0.10
+    * Version: 2.1.0
 	* Text Domain: hd-quiz
 	* Domain Path: /languages
 */
+
+// TODO: bundle front end scripts again
 
 // Future updates
 // * Next/Prev question when admin editing
@@ -23,7 +25,7 @@ if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.0.10');
+    define('HDQ_PLUGIN_VERSION', '2.1.0');
 }
 
 // Settings that a power user might want to change,
@@ -109,32 +111,33 @@ add_filter('redirect_canonical', 'hdq_disable_redirect_canonical');
 function hdq_create_settings_page()
 {
     if (hdq_user_permission()) {
-        function hdq_register_quizzes_page()
-        {
-            $addon_text = "";
-            $new_addon = get_transient("hdq_new_addon");
-            if ($new_addon === false) {
-                hdq_check_for_updates();
-            } else {
-                $new_addon["isNew"] = sanitize_text_field($new_addon["isNew"]);
-                if ($new_addon["isNew"] === "yes") {
-                    $addon_text = ' <span class="awaiting-mod">NEW</span>';
-                }
-            }
-
-            add_menu_page('HD Quiz', 'HD Quiz', 'publish_posts', 'hdq_quizzes', 'hdq_main_page', 'dashicons-clipboard', 5);
-
-            add_submenu_page("hdq_quizzes", "HD Quiz Addons", __("Addons", "hd-quiz") . $addon_text, "delete_others_posts", "hdq_addons", "hdq_addons_page");
-            add_submenu_page("hdq_quizzes", "HD Quiz Tools", __("Tools", "hd-quiz"), "manage_options", "hdq_tools", "hdq_tools_page");
-            add_submenu_page("hdq_quizzes", "HD Quiz Settings", __("Settings", "hd-quiz"), "manage_options", 'hdq_options', 'hdq_about_settings_page');
-
-            // tools, hidden pages
-            add_submenu_page("", "CSV Importer", "CSV Importer", "manage_options", "hdq_importer", "hdq_tools_csv_importer");
-        }
         add_action('admin_menu', 'hdq_register_quizzes_page');
     }
 }
 add_action('init', 'hdq_create_settings_page');
+
+function hdq_register_quizzes_page()
+{
+    $addon_text = "";
+    $new_addon = get_transient("hdq_new_addon");
+    if ($new_addon === false) {
+        hdq_check_for_updates();
+    } else {
+        $new_addon["isNew"] = sanitize_text_field($new_addon["isNew"]);
+        if ($new_addon["isNew"] === "yes") {
+            $addon_text = ' <span class="awaiting-mod">NEW</span>';
+        }
+    }
+
+    add_menu_page('HD Quiz', 'HD Quiz', 'publish_posts', 'hdq_quizzes', 'hdq_main_page', 'dashicons-clipboard', 5);
+
+    add_submenu_page("hdq_quizzes", "HD Quiz Addons", __("Addons", "hd-quiz") . $addon_text, "delete_others_posts", "hdq_addons", "hdq_addons_page");
+    add_submenu_page("hdq_quizzes", "HD Quiz Tools", __("Tools", "hd-quiz"), "manage_options", "hdq_tools", "hdq_tools_page");
+    add_submenu_page("hdq_quizzes", "HD Quiz Settings", __("Settings", "hd-quiz"), "manage_options", 'hdq_options', 'hdq_about_settings_page');
+
+    // tools, hidden pages
+    add_submenu_page("", "CSV Importer", "CSV Importer", "manage_options", "hdq_importer", "hdq_tools_csv_importer");
+}
 
 /* Set custom plugin links on WP plugins page
 ------------------------------------------------------- */

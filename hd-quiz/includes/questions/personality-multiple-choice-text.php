@@ -10,12 +10,18 @@ foreach ($answers as $k => $answer) {
     foreach ($answer as $k => $value) {
         if ($k !== "selected" && str_contains($k, "selected")) {
             if ($value === "yes") {
-                array_push($selected, $k);
+                $value = 1;
+            } else {
+                $value = intval($value);
             }
-        }
-    }
-    $selected = json_encode($selected);
 
+            if (!isset($selected[$k])) {
+                $selected[$k] = 0;
+            }
+            $selected[$k] = $selected[$k] + $value;
+        }
+    };
+    $selected = json_encode($selected);
 ?>
     <div class="hdq_row">
         <label class="hdq_label_answer" id="hda_label_<?php echo $i . '_' . $question["question_id"]; ?>" data-type="radio" data-id="hdq_question_<?php echo $question["question_id"]; ?>" for="hdq_option_<?php echo $i . '_' . $question["question_id"]; ?>">

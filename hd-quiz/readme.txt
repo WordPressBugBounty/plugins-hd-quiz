@@ -3,7 +3,7 @@ Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 5.0
 Tested up to: 6.9
-Stable tag: 2.0.10
+Stable tag: 2.1.0
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,12 +18,19 @@ HD Quiz. The easiest way to create fun quizzes for your site
 
 # **If you are looking for an easy way to add fun quizzes to your site, HD Quiz is here to help.** 🙋
 
-👀 [VIEW DEMO QUIZ](https://hdplugins.com/hd-quiz-demo/?utm_source=WPOrgPluginPage) 👀
+👀 [VIEW DEMO QUIZZES](https://hdplugins.com/hd-quiz-demo/?utm_source=WPOrgPluginPage) 👀
 
 
 HD Quiz is an **easy and intuitive quiz builder** for WordPress. With HD Quiz, you can create an unlimited amount of quizzes and embed them anywhere on your site. We use both shortcodes as well as a custom Gutenberg block to make this as easy as possible for you.
 
 The quizzes are fun, beautiful, highly customizable, accessible (visually impaired, screen readers etc), and automatically responsive. HD Quiz was designed so that **quizzes automatically inherit the fonts and styling of your theme** - but you can still customize the styles yourself or purchase the HD Quiz Styler addon to really make the quizzes your own.
+
+**Perfect for:**
+
+- Bloggers who want engaging WordPress quizzes
+- Teachers practice tests and exams
+- Businesses building lead-generation quizzes
+- Content creators making personality quizzes
 
 
 ## ▶️ VIEW VIDEO DEMO / TUTORIAL ▶️
@@ -31,12 +38,49 @@ The quizzes are fun, beautiful, highly customizable, accessible (visually impair
 # https://www.youtube.com/watch?v=YDyNDs3TdTs
 
 ## ✨ Features ✨
-HD Quiz has *so many* cool features, settings, and options, that I cannot possibly list them all. So here are some of the highlights of what I think are some of the coolest and most important features of HD Quiz. **Everything you see listed here is 100% FREE!**
+HD Quiz has *so many* cool features, settings, and options, that I cannot possibly list them all.  So here are some of the highlights of what I think are some of the coolest and most important features of HD Quiz. **Everything you see listed here is 100% FREE!**
 
 ## ALWAYS FEEL FREE TO REQUEST SUPPORT
 
 [See full documentation](https://hdplugins.com/learn/hd-quiz/hd-quiz-documentation/?utm_source=WPOrgPluginPage)
 
+**Core Quiz Features**
+- Unlimited quizzes, questions, and answers
+- Scored quizzes and personality quizzes
+- Multiple question types
+- Custom pass percentages
+- Advanced marking features
+- Question pools (randomly select `n` questions from a pool)
+- Weighted answers
+- Pagination
+- Quiz timers
+- Mobile and touch friendly
+- Accessible WCAG friendly quizzes
+- Author quiz creation access
+
+**Question Types**
+- Multiple choice - test
+- Image-based answers
+- Select all that apply
+- Text input answers
+- Heading / section dividers
+
+**Quiz Experience**
+- Timers (per quiz or per question)
+- Pagination
+- Answer marking (after quiz completion, or instant)
+- Custom result messages
+- Question tooltips
+- Extra question content to add more context to why the correct answer is correct
+- Redirect on completion
+- Quizzes inherit your theme styling
+
+**For the Devs**
+Developer Friendly with tons of filters and hooks, as well as documentation. jQuery free!
+
+HD Quiz is designed to be lightweight and performant. Scripts and styles only load on pages that actually contain a quiz. HD Quiz respects user privacy and does not require external tracking scrits, thus is GDPR compatible.
+
+** Master list**
 - Unlimited amount of quizzes, questions, and answers
 - Scored quizzes and Personalty-type quizzes
 - Each quiz has its own options/settings
@@ -125,6 +169,21 @@ Once installed, you will need to create your first quiz by going to HD Quiz, the
 
 == Frequently Asked Questions ==
 
+= Does HD Quiz work with Gutenberg? =
+Yes, HD Quiz comes with a Gutenberg block.
+
+= Can I create personality quizzes? =
+Yes, HD Quiz can do traditional "scored" quizzes, along with personality-type quizzes.
+
+= Can quizzes include images or media? =
+HD Quiz has "image" based questions where a user needs to select the correct image. You can also add custom content to each question including video, image, audio, etc.
+
+= Is HD Quiz mobile friendly? =
+Sure is! HD Quiz is fully mobile and touch screen compatible. This includes the admin interface as well, so you can create quizzes on the go!
+
+= Can I randomize questions? =
+Yes, both the question order can be randomized, as well as the order of the answers.
+
 = What's the difference between WP Pagination and jQuery Pagination? Which should I use? =
 
 Unless you are a unique situation, I'd almost always recommend using jQuery Pagination as it provides more control for you and a better experience for your users. WP Pagination should only be used if you are trying to increase your overall page views for ad revenue or something similar.
@@ -145,6 +204,11 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.1.0 =
+* - Weighted answers!
+* - New filter `hdq_filter_question_data`
+* - New quiz settings - Force paginate all questions (Advanced tab)
+
 = 2.0.10 =
 * - minor security fix
 
@@ -196,7 +260,6 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 * Faster, better admin area
 * Better translations
 * New quiz features
-
 
 = 1.8.15 =
 * More translations
@@ -274,7 +337,7 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 * New "auto scroll" functionalty (enable Legacy Scroll if you want to use the old system)
 
 = 1.8.1 =
-* Various bug fixes and enhancments related to 1.8.0
+* Various bug fixes and enhancements related to 1.8.0
 
 = 1.8.0 =
 * Too many changes to list, but here are some of the major
@@ -284,7 +347,7 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 * Quiz and question meta now hookable (for developers)
 * Significantly faster
 * Basic AMP detection to direct users to non AMP version
-* Basic loop detection if more than one quiz is on a page at a time to improve compatability
+* Basic loop detection if more than one quiz is on a page at a time to improve compatibility
 * Ability to add basic formatting such as `strong` and `sup` to questions and answers
 * various bug fixes and enhancements
 * a whole lot more
@@ -292,7 +355,7 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 = 1.7.0 =
 * minor bug fixes and updates
 * [feature] only allow answers to be selected once
-* [enhancments] custom actions for developers
+* [enhancements] custom actions for developers
 * [addon] Release of HD Quiz Save Results Light (view addons page)
 
 = 1.6.1 =
@@ -302,7 +365,7 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 
 = 1.6.0 =
 * complete admin UI overhaul
-* additional bug fixes and enhancments
+* additional bug fixes and enhancements
 * integrated custom question ordering
 * too many updates to remember
 
@@ -315,12 +378,12 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * removal of results.php - all calculation done client side now
 
 = 1.4.2 =
-* various bug fixes and compatability increases
+* various bug fixes and compatibility increases
 * Quiz option to grab from a pool of questions
 * Quiz option to allow the custom question text to appear even if the user selected the correct answer
 
 = 1.4.1 =
-* various bug fixes and compatability increases
+* various bug fixes and compatibility increases
 * the word 'question' (that's prefixed before every question) is now translatable in the HD Quiz options page along with 'Next' and 'Finish'.
 * More power over the quiz results pass/fail text. You can now embolded, italicize, and linkify the text.
 * Each question can have a small write up explaining what the right answer is. This would only show if entered and if the user get's the question wrong. You can also add links to this sections if you wish.
@@ -358,7 +421,7 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 = 1.2 =
 * advancements to featured images for questions
  * images will upscale if you upload a small image
- * each answer can have it's own featured image.
+ * each answer can have its own featured image.
 * code cosmetics, minor bug fixes, and code optimizations
 
 = 1.1 =
@@ -370,5 +433,7 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.0.10 =
-* Minor security fix
+= 2.1.0 =
+* - Weighted answers!
+* - New filter `hdq_filter_question_data`
+* - New quiz settings - Force paginate all questions (Advanced tab)

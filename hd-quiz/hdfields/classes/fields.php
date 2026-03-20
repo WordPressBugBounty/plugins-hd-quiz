@@ -189,7 +189,7 @@ class _hd_fields
             }
             $html .= '<div id = "hd_tab_content_' . esc_attr($tab["id"]) . '" class = "hd_tab_content_section ' . $active . '">';
             $html .= '<h2 class="hd_tab_heading">' . esc_html($tab["label"]) . '</h2>';
-            $html .= $this->render_fields($tab["children"], $tab["id"]);
+            $html .= $this->render_fields($tab["children"]);
             $html .= '</div>';
             $i++;
         }

@@ -5,7 +5,7 @@ class _hdq_dashboard
     public $fields = array();
     public $settings = array();
 
-    function __construct($flat = false)
+    function __construct()
     {
         $this->settings();
         $this->fields();

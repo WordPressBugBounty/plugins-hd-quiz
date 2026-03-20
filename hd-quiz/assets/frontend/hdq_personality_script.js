@@ -368,12 +368,13 @@ const HDQ = {
 				for (let i = 0; i < answers.length; i++) {
 					if (answers[i].checked) {
 						let data = JSON.parse(answers[i].getAttribute("data-value"));
-						for (let i = 0; i < data.length; i++) {
-							if (!selected[data[i]]) {
-								selected[data[i]] = 0;
+						Object.keys(data).forEach((key) => {
+							const value = data[key];
+							if (!selected[key]) {
+								selected[key] = 0;
 							}
-							selected[data[i]] = selected[data[i]] + 1;
-						}
+							selected[key] = selected[key] + value;
+						});
 					}
 				}
 				return selected;
@@ -572,6 +573,8 @@ const HDQ = {
 				}
 			}
 		}
+
+		HDQ.VARS.hdq_outomes = results;
 
 		// get the final answer
 		let score = 0;
