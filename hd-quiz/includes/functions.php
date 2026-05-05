@@ -289,7 +289,7 @@ function hdq_print_questions($data)
             $question = hdq_get_question(get_the_ID(), $data["quiz_id"]);
 
             // Paginate
-            if ($data["quiz"]["paginate_all"] === "yes") {
+            if (isset($data["quiz"]) && isset($data["quiz"]["paginate_all"]) && $data["quiz"]["paginate_all"] === "yes") {
                 if ($i !== 1) {
                     hdq_print_jPaginate($data, $question);
                 } else {
@@ -304,7 +304,7 @@ function hdq_print_questions($data)
                     }
                 }
             }
-            
+
             // used to add custom data attributes to questions
             // useful for custom question types
             $extra = apply_filters('hdq_extra_question_data', array(), $question, $data["quiz_id"]);
