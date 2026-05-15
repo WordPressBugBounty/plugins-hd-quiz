@@ -1,9 +1,9 @@
 ﻿=== HD Quiz ===
 Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
-Requires at least: 5.0
+Requires at least: 6.0
 Tested up to: 6.9
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -204,6 +204,10 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.1.1 =
+* - Improvements to pagination with fallbacks
+* - Minor content/description improvements
+
 = 2.1.0 =
 * - Weighted answers!
 * - New filter `hdq_filter_question_data`

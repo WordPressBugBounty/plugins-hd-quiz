@@ -418,6 +418,25 @@ const HDQ = {
 				answers[i].disabled = true;
 			}
 		},
+		isVisible: function (question) {
+			return question.offsetParent !== null || question.getClientRects().length > 0;
+		},
+		getPaginationButtonForQuestion: function (question) {
+			const paginates = HDQ.el.getElementsByClassName("hdq_jPaginate");
+			let lastPaginateBeforeQuestion = null;
+			for (let i = 0; i < paginates.length; i++) {
+				if (question.compareDocumentPosition(paginates[i]) === 2) {
+					lastPaginateBeforeQuestion = paginates[i];
+				} else if (question.compareDocumentPosition(paginates[i]) === 4) {
+					break;
+				}
+			}
+			if (!lastPaginateBeforeQuestion) {
+				return null;
+			}
+			const buttons = lastPaginateBeforeQuestion.getElementsByClassName("hdq_next_button");
+			return buttons.length > 0 ? buttons[0] : null;
+		},
 		enable: function (question) {
 			const answers = question.getElementsByClassName("hdq_option");
 			for (let i = 0; i < answers.length; i++) {
@@ -478,7 +497,7 @@ const HDQ = {
 			HDQ.questions.disableAll();
 			HDQ.questions.enable(found);
 
-			if (found.checkVisibility()) {
+			if (HDQ.questions.isVisible(found)) {
 				found.scrollIntoView({
 					behavior: "smooth",
 					block: "center",
@@ -486,9 +505,12 @@ const HDQ = {
 				});
 			} else {
 				// Must be hidden behind paginate
-				const pagainte_button = HDQ.el.getElementsByClassName("hdq_next_button")[HDQ.questions.jcount];
-				HDQ.paginate.next(pagainte_button);
-				HDQ.questions.jcount++;
+				const paginate_button = HDQ.questions.getPaginationButtonForQuestion(found);
+				if (paginate_button) {
+					HDQ.paginate.next(paginate_button);
+				} else {
+					console.warn("HD QUIZ: Unable to locate pagination button for next question");
+				}
 			}
 			HDQ.timer.reset();
 		},

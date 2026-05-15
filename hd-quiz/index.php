@@ -5,12 +5,10 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.1.0
+    * Version: 2.1.1
 	* Text Domain: hd-quiz
 	* Domain Path: /languages
 */
-
-// TODO: bundle front end scripts again
 
 // Future updates
 // * Next/Prev question when admin editing
@@ -19,13 +17,12 @@
 // * New question types
 // * Filter to add new quiz types
 // * More translations
-// * Weighted questions
 
 if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.1.0');
+    define('HDQ_PLUGIN_VERSION', '2.1.1');
 }
 
 // Settings that a power user might want to change,
