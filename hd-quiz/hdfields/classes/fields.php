@@ -329,10 +329,10 @@ class _hd_fields
 
     public function get_description($field, $after = false)
     {
-        if ($after && !isset($field["description"]) || $field["description"] == "") {
+        if ($after && (!isset($field["description"]) || $field["description"] == "")) {
             return "";
         }
-        if ($after && !isset($field["hasParent"]) || isset($field["hasParent"]) && $field["hasParent"] !== true) {
+        if ($after && (!isset($field["hasParent"]) || (isset($field["hasParent"]) && $field["hasParent"] !== true))) {
             return "";
         }
         $afterClass = "";

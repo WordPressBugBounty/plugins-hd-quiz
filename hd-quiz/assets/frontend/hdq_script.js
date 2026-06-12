@@ -3,6 +3,7 @@ const HDQ = {
 	init: async function () {
 		console.log("HD Quiz v" + HDQ_VERSION + " init [general]");
 		HDQ.VARS = HDQ_DATA;
+		HDQ.nonce();
 
 		HDQ.el = document.getElementsByClassName("hdq_quiz_wrapper")[0];
 		HDQ.VARS.timer = {
@@ -35,6 +36,17 @@ const HDQ = {
 		HDQ.paginate.init();
 		HDQ.timer.init();
 		HDQ.kb();
+	},
+	nonce: async function () {
+		const nonce = await fetch(HDQ.VARS.quiz.ajax_url, {
+			method: "POST",
+			credentials: "same-origin",
+			body: new URLSearchParams({
+				action: "hdq_get_quiz_nonce",
+			}),
+		});
+		const res = await nonce.json();
+		HDQ.VARS.quiz.nonce = res.data.nonce;
 	},
 	kb: function () {
 		const items = document.getElementsByClassName("hdq_kb");
@@ -536,13 +548,16 @@ const HDQ = {
 					});
 				}
 			},
-			select: function (question, answer) {
+			select: async function (question, answer) {
 				const answers = question.getElementsByClassName("hdq_option");
 				for (let i = 0; i < answers.length; i++) {
 					answers[i].checked = false;
 				}
 				answer.checked = true;
 				if (HDQ.VARS.quiz.immediately_mark_answers === "yes") {
+					if (HDQ.VARS.settings.secure_mode === "yes") {
+						await HDQ.getCorrectAnswers([question]);
+					}
 					HDQ.questions.mark(question);
 				}
 
@@ -602,12 +617,16 @@ const HDQ = {
 					});
 				}
 			},
-			select: function (question, answer) {
+			select: async function (question, answer) {
 				if (HDQ.VARS.quiz.stop_answer_reselect === "yes") {
 					answer.disabled = true;
 				}
 
 				if (HDQ.VARS.quiz.immediately_mark_answers === "yes") {
+					if (HDQ.VARS.settings.secure_mode === "yes") {
+						await HDQ.getCorrectAnswers([question]);
+					}
+
 					// we actually don't want to mark right away since multiple selections can be made
 					// we only want to check when the current answer is incorrect
 					if (answer.checked && parseInt(answer.value) < 1) {
@@ -689,8 +708,12 @@ const HDQ = {
 					HDQ.answers.text_based_answer.select(question, this);
 				});
 			},
-			select: function (question, answer) {
+			select: async function (question, answer) {
 				if (HDQ.VARS.quiz.immediately_mark_answers === "yes") {
+					if (HDQ.VARS.settings.secure_mode === "yes") {
+						await HDQ.getCorrectAnswers([question]);
+					}
+
 					HDQ.questions.mark(question);
 				}
 
@@ -879,6 +902,7 @@ const HDQ = {
 		const formdata = new FormData();
 		formdata.append("action", action);
 		formdata.append("data", JSON.stringify(data));
+		formdata.append("nonce", HDQ.VARS.quiz.nonce);
 
 		let res = await fetch(HDQ.VARS.quiz.ajax_url, {
 			method: "POST",
@@ -903,6 +927,76 @@ const HDQ = {
 				window.location.href = HDQ.VARS.quiz.quiz_redirect_url;
 			}, timeout);
 		},
+	},
+	getCorrectAnswers: async function (questions) {
+		// get correct answers from server and store in VARS for secure mode quizzes
+		let question_ids = [];
+		for (let i = 0; i < questions.length; i++) {
+			question_ids.push(questions[i].getAttribute("data-id"));
+		}
+
+		const formdata = new FormData();
+		formdata.append("action", "hdq_get_correct_answers");
+		formdata.append("data", JSON.stringify({ quiz_id: HDQ.VARS.quiz.quiz_id, question_ids: question_ids }));
+		formdata.append("nonce", HDQ.VARS.quiz.nonce);
+
+		let res = await fetch(HDQ.VARS.quiz.ajax_url, {
+			method: "POST",
+			credentials: "same-origin",
+			body: formdata,
+		});
+		res = await res.json();
+		if (!res.status) {
+			console.error("Error retrieving correct answers");
+			return;
+		}
+
+		let data = res.data;
+		for (let i = 0; i < data.length; i++) {
+			let question = document.getElementById("hdq_question_" + data[i].question_id);
+			if (!question) {
+				console.warn("Unable to find question for id " + data[i].question_id);
+				continue;
+			}
+
+			const type = question.getAttribute("data-type");
+			if (type === "question_as_title") {
+				continue; // no answers for this type
+			}
+
+			// find the actual inputs with value
+			let inputs = question.getElementsByClassName("hdq_option");
+			for (let ii = 0; ii < data[i].correct_answers.length; ii++) {
+				let answer = data[i].correct_answers[ii];
+				let answer_input = question.querySelector(`[data-answer="${answer.id}"]`);
+
+				if (type !== "text_based_answer") {
+					let value = 0;
+					if (answer.selected === "yes") {
+						value = answer.weight ?? 0;
+					} else {
+						value = parseInt(answer.selected);
+						if (isNaN(value)) {
+							value = 0;
+						}
+					}
+					if (answer_input) {
+						answer_input.setAttribute("value", value);
+					} else {
+						console.warn("Unable to find input for correct answer id " + answer.id);
+					}
+				} else {
+					// for text based answers, we need to encode the correct answers and store them in a data attribute
+					let correct_answers = [];
+					for (let iii = 0; iii < data[i].correct_answers.length; iii++) {
+						correct_answers.push(data[i].correct_answers[iii].value.toLocaleUpperCase().trim());
+					}
+					let answer_input = question.querySelector(`[data-id="${data[i].question_id}"]`);
+					answer_input.setAttribute("data-answers", encodeURIComponent(JSON.stringify(correct_answers)));
+				}
+			}
+		}
+		return;
 	},
 	submit: async function () {
 		const questions = HDQ.el.getElementsByClassName("hdq_question");
@@ -935,6 +1029,10 @@ const HDQ = {
 		}
 
 		HDQ.paginate.removeAll();
+
+		if (HDQ.VARS.settings.secure_mode === "yes") {
+			await HDQ.getCorrectAnswers(questions);
+		}
 
 		for (let i = 0; i < HDQ.VARS.hdq_before_submit.length; i++) {
 			await HDQ.submitAction(HDQ.VARS.hdq_before_submit[i]);
@@ -1010,7 +1108,7 @@ const HDQ = {
 		HDQ.init();
 	} else {
 		console.warn("HD Quiz: Multiple quizzes found on this page");
-		const hd_warning = `<div class = "hdq_multiple_quizzes_warning"><p>HD Quiz: You have multiple quizzes running on this page. <br/>Due to the complexity of quizzes, only one quiz can be on a page at a time. Please place quizzes on seprate pages.</p></div>`;
+		const hd_warning = `<div class = "hdq_multiple_quizzes_warning"><p>HD Quiz: You have multiple quizzes running on this page. <br/>Due to the complexity of quizzes, only one quiz can be on a page at a time. Please place quizzes on separate pages.</p></div>`;
 		for (let i = 0; i < el.length; i++) {
 			el[i].insertAdjacentHTML("beforebegin", hd_warning);
 		}

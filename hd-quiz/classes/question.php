@@ -106,7 +106,6 @@ class _hdq_question
 						"label": "Paginate",
 						"required": "",
 						"default": "",
-						"tooltip": "",
 						"tooltip": "Start a new page with this question. User will need to select \"next\" to see this question or ones below it",
 						"placeholder": "",
 						"options": [{ "label": "Yes", "value": "yes" }],
@@ -474,18 +473,94 @@ class _hdq_question
     }
 
 
+    private function getPreviousQuestionId()
+    {
+        $args = array(
+            'post_type' => 'post_type_questionna',
+            'posts_per_page' => -1,
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'quiz',
+                    'field' => 'term_id',
+                    'terms' => $this->quiz_id,
+                )
+            )
+        );
+
+        $questions = get_posts($args);
+        $current_index = -1;
+
+        foreach ($questions as $index => $question) {
+            if ($question->ID == $this->question_id) {
+                $current_index = $index;
+                break;
+            }
+        }
+
+        if ($current_index > 0) {
+            return $questions[$current_index - 1]->ID;
+        }
+
+        return false;
+    }
+
+    private function getNextQuestionId()
+    {
+        $args = array(
+            'post_type' => 'post_type_questionna',
+            'posts_per_page' => -1,
+            'orderby' => 'menu_order',
+            'order' => 'ASC',
+            'tax_query' => array(
+                array(
+                    'taxonomy' => 'quiz',
+                    'field' => 'term_id',
+                    'terms' => $this->quiz_id,
+                )
+            )
+        );
+
+        $questions = get_posts($args);
+        $current_index = -1;
+
+        foreach ($questions as $index => $question) {
+            if ($question->ID == $this->question_id) {
+                $current_index = $index;
+                break;
+            }
+        }
+
+        if ($current_index >= 0 && $current_index < count($questions) - 1) {
+            return $questions[$current_index + 1]->ID;
+        }
+
+        return false;
+    }
+
     private function getHeader()
     {
         $title = "";
         if ($this->question_id > 0) {
             $title = get_the_title($this->question_id);
         }
+
+        $prev_question_id = $this->getPreviousQuestionId();
+        $next_question_id = $this->getNextQuestionId();
+
         ob_start();
 ?>
         <div id="hdq_question_header">
             <div id="hdq_question_header_left">
                 <a href="#/quiz/<?php echo esc_attr($this->quiz_id); ?>" class="hdq_button hd_kb" tabindex="0" title="Go back to quiz page"><span class="dashicons dashicons-arrow-left-alt"></span> <?php _e("Back to quiz", "hd-quiz"); ?></a>
                 <a href="#/question/<?php echo esc_attr($this->quiz_id); ?>/0" onclick="HDQ.reload(this)" class="hdq_button hd_kb" tabindex="0" title="Add another question to this quiz"><span class="dashicons dashicons-plus"></span> <?php _e("Add new question", "hd-quiz"); ?></a>
+                <?php if ($prev_question_id): ?>
+                    <a href="#/question/<?php echo esc_attr($this->quiz_id); ?>/<?php echo esc_attr($prev_question_id); ?>" onclick="HDQ.reload(this)" class="hdq_button hd_kb" tabindex="0" title="Go to previous question"><span class="dashicons dashicons-arrow-left"></span></a>
+                <?php endif; ?>
+                <?php if ($next_question_id): ?>
+                    <a href="#/question/<?php echo esc_attr($this->quiz_id); ?>/<?php echo esc_attr($next_question_id); ?>" onclick="HDQ.reload(this)" class="hdq_button hd_kb" tabindex="0" title="Go to next question"><span class="dashicons dashicons-arrow-right"></span></a>
+                <?php endif; ?>
             </div>
             <div id="hdq_question_header_right">
                 <div id="hd_delete_question" class="hdq_button hdq_button_warning hd_kb" role="button" data-quiz="<?php echo esc_attr($this->quiz_id); ?>" data-id="<?php echo esc_attr($this->question_id); ?>" tabindex="0" title="Delete this question"><span class="dashicons dashicons-trash"></span></div>

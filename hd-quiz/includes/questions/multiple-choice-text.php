@@ -16,7 +16,7 @@ foreach ($answers as $k => $answer) {
     <div class="hdq_row">
         <label class="hdq_label_answer" id="hda_label_<?php echo $k . '_' . $question["question_id"]; ?>" data-type="radio" data-id="hdq_question_<?php echo $question["question_id"]; ?>" for="hdq_option_<?php echo $k . '_' . $question["question_id"]; ?>">
             <div class="hdq-options-check">
-                <input type="checkbox" aria-labelledby="hda_label_<?php echo $k . '_' . $question["question_id"]; ?>" autocomplete="off" title="<?php echo htmlentities($answer["value"]); ?>" data-id="<?php echo $question["question_id"]; ?>" class="hdq_option hdq_check_input" data-type="radio" value="<?php echo $selected; ?>" name="hdq_option_<?php echo $k . '_' . $question["question_id"]; ?>" id="hdq_option_<?php echo $k . '_' . $question["question_id"]; ?>">
+                <input type="checkbox" aria-labelledby="hda_label_<?php echo $k . '_' . $question["question_id"]; ?>" autocomplete="off" title="<?php echo htmlentities($answer["value"]); ?>" data-id="<?php echo $question["question_id"]; ?>" data-answer="<?php echo $answer["id"]; ?>" class="hdq_option hdq_check_input" data-type="radio" value="<?php echo $selected; ?>" name="hdq_option_<?php echo $k . '_' . $question["question_id"]; ?>" id="hdq_option_<?php echo $k . '_' . $question["question_id"]; ?>">
                 <span class="hdq_toggle"></span>
             </div>
             <span class="hdq_aria_label">

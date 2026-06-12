@@ -1,5 +1,5 @@
 <?php
-function hdq_regsiter_custom_post_type_questions()
+function hdq_register_custom_post_type_questions()
 {
     $labels = array(
         'name'                => _x('Questions', 'Post Type General Name', 'text_domain'),
@@ -27,4 +27,4 @@ function hdq_regsiter_custom_post_type_questions()
     );
     register_post_type('post_type_questionna', $args); // I wish I didn't name this something so stupid. 2015 Dylan was a dummy. He was young a reckless.
 }
-add_action('init', 'hdq_regsiter_custom_post_type_questions', 0);
+add_action('init', 'hdq_register_custom_post_type_questions', 0);

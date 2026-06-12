@@ -13,6 +13,13 @@ class _hdq_settings
 
 	private function fields()
 	{
+
+		$ssv_addon = "";
+		if (function_exists("hdq_a_ssv_submit")) {
+			$ssv_addon = "<br/><strong>NOTE:</strong> You have the SSV Addon installed. Please deactivate that addon before enabling this to avoid conflicts.";
+		}
+
+
 		$fields = '[
 	{
 		"label": "' . esc_attr(trim(__("General", "hd-quiz"))) . '",
@@ -125,7 +132,18 @@ class _hdq_settings
 						"placeholder": "",
 						"options": [{ "label": "Yes", "value": "yes" }],
 						"type": "radio"
-					}					
+					},
+					{
+						"id": "secure_mode",
+						"label": "Enable secure mode",
+						"required": "",
+						"default": "",
+						"tooltip": "This is for scored/general quizzes only, and may not have full compatibility with all features.",
+						"description": "Enable this if you want to make \"cheating\" significantly harder. This feature uses your server to validate answers, which is slower, but more secure. ' . $ssv_addon . '<small>If you are using HD Quiz for just fun little quizzes, it is not recommended to enable this</small>",
+						"placeholder": "",
+						"options": [{ "label": "Yes", "value": "yes" }],
+						"type": "radio"
+					}			
 				]
 			},			
 			{

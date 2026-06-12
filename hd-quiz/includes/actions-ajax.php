@@ -214,3 +214,51 @@ function hdq_csv_import_question()
     die();
 }
 add_action("wp_ajax_hdq_csv_import_question", "hdq_csv_import_question");
+
+function hdq_get_correct_answers()
+{
+    if (!isset($_POST['nonce'])) {
+        wp_send_json_error(array("message" => "Missing nonce"));
+        die();
+    }
+
+    if (!wp_verify_nonce($_POST['nonce'], 'hdq_quiz_nonce')) {
+        wp_send_json_error(array("message" => "Invalid nonce"));
+        die();
+    }
+
+    $data = $_POST["data"];
+    $data = stripcslashes($data);
+    $data = json_decode($data, true);
+
+    $quiz_id = intval($data["quiz_id"]);
+    $question_ids = array_map("intval", $data["question_ids"]);
+
+
+    $quiz = hdq_get_quiz($quiz_id);
+    if (!is_array($quiz) || empty($quiz['quiz_name'])) {
+        echo json_encode(array("success" => false, "message" => "Quiz not found"));
+        die();
+    }
+
+    $response = array(
+        "status" => true,
+        "data" => array()
+    );
+    foreach ($question_ids as $question_id) {
+        $question = hdq_get_question($question_id, $quiz_id);
+        if (!is_array($question) || empty($question['question_type'])) {
+            echo json_encode(array("success" => false, "message" => "Question not found: ID " . $question_id));
+            die();
+        }
+
+        $response["data"][] = array(
+            "question_id" => $question_id,
+            "correct_answers" => $question["question_answers"]
+        );
+    }
+    echo json_encode($response);
+    die();
+}
+add_action("wp_ajax_hdq_get_correct_answers", "hdq_get_correct_answers");
+add_action("wp_ajax_nopriv_hdq_get_correct_answers", "hdq_get_correct_answers");

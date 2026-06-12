@@ -5,7 +5,7 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.1.1
+    * Version: 2.2.0
 	* Text Domain: hd-quiz
 	* Domain Path: /languages
 */
@@ -22,7 +22,7 @@ if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.1.1');
+    define('HDQ_PLUGIN_VERSION', '2.2.0');
 }
 
 // Settings that a power user might want to change,
@@ -44,8 +44,8 @@ function hdq_admin_init()
     if (!defined('HDQ_DISABLE_PREV_BUTTON')) {
         define('HDQ_DISABLE_PREV_BUTTON', false);
     }
-    if (!defined('HDQ_SECURE_ANSWERS')) {
-        define('HDQ_SECURE_ANSWERS', false);
+    if (!defined('HDQ_ENABLE_WP_PAGINATION')) {
+        define('HDQ_ENABLE_WP_PAGINATION', false);
     }
 }
 add_action("init", "hdq_admin_init", 10);

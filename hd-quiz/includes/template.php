@@ -49,6 +49,12 @@ if ($data["settings"]["adset_code"] !== "") {
     $data["adcode"] = apply_filters("hdq_content", htmlspecialchars_decode($data["settings"]["adset_code"]));
 }
 
+if ($data["settings"]["secure_mode"] === "yes") {
+    define('HDQ_SECURE_ANSWERS', true);
+} else {
+    define('HDQ_SECURE_ANSWERS', false);
+}
+
 $hdq_local_vars = hdq_get_local_vars($data["quiz"], $data["settings"]);
 $hdq_local_vars->quiz_name = $quiz_name->name;
 $hdq_local_vars = 'const HDQ_VERSION = "' . HDQ_PLUGIN_VERSION . '"; const HDQ_DATA = ' . json_encode($hdq_local_vars) . ';';
@@ -64,12 +70,10 @@ $hdq_local_vars = 'const HDQ_VERSION = "' . HDQ_PLUGIN_VERSION . '"; const HDQ_D
     <div class="hdq_before">
         <?php do_action("hdq_before", $quiz_id); ?>
     </div>
-
     <?php
     $quiz_start = hdq_print_quiz_start($data);
     echo $quiz_start["html"];
     ?>
-
     <div class="hdq_quiz <?php echo $quiz_start["classes"]; ?>">
         <?php
         if ($data["quiz"]["results_position"] != "below") {

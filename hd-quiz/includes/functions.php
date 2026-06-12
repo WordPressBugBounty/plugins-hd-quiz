@@ -34,10 +34,9 @@ function hdq_validate_nonce($data)
 
     if (!$valid) {
         $res = new stdClass();
-        $res->status = "success";
+        $res->status = "fail";
         $res->html = "Unable to validate your credentials. Your NONCE may have expired. Please reload this page from your WordPress admin to refresh your NONCE.";
         echo json_encode($res);
-        die();
     }
 }
 
@@ -86,6 +85,11 @@ function hdq_get_question($question_id, $quiz_id)
 {
     $question_id = intval($question_id);
     $question = new _hdq_question($quiz_id, $question_id, true);
+
+    foreach ($question->data["question_answers"] as $k => $d) {
+        $question->data["question_answers"][$k]["id"] = $k; // give each answer an ID so we can reference it even if randomized
+    }
+
     $data = apply_filters("hdq_filter_question_data", $question->data, $question_id, $quiz_id);
     return $data;
 }
@@ -275,6 +279,7 @@ function hdq_print_questions($data)
         'paged' => $paged,
         'orderby' => $data["question_order"], // defaults to menu_order
         'order' => 'ASC',
+        'ignore_custom_sort' => true,
         'suppress_filters' => true // attempt to remove any filters added by other plugins so that we can use our own order
     );
 
@@ -313,7 +318,7 @@ function hdq_print_questions($data)
                 $extra_data = esc_attr("data-" . sanitize_text_field($k)) . ' = "' . esc_attr(sanitize_text_field($d)) . '" ';
             }
 ?>
-            <div class="hdq_question" <?php echo $extra_data; ?> data-type="<?php echo esc_attr($question["question_type"]); ?>" id="hdq_question_<?php echo esc_attr($question["question_id"]); ?>">
+            <div class="hdq_question" <?php echo $extra_data; ?> data-type="<?php echo esc_attr($question["question_type"]); ?>" id="hdq_question_<?php echo esc_attr($question["question_id"]); ?>" data-id="<?php echo esc_attr($question["question_id"]); ?>">
                 <?php
                 hdq_print_question_featured_image($question);
                 if ($question["before_question_content"] != "") {
@@ -707,6 +712,15 @@ function hdq_rewrites_init()
     add_rewrite_rule('hd-quiz/(.+)', 'index.php', 'top');
 }
 add_action('init', 'hdq_rewrites_init');
+
+// create nonce for quiz actions
+function hdq_get_quiz_nonce()
+{
+    $nonce = wp_create_nonce('hdq_quiz_nonce');
+    wp_send_json_success(array('nonce' => $nonce));
+}
+add_action("wp_ajax_hdq_get_quiz_nonce", "hdq_get_quiz_nonce");
+add_action("wp_ajax_nopriv_hdq_get_quiz_nonce", "hdq_get_quiz_nonce");
 
 /* Question render functions
 ------------------------------------------------------- */

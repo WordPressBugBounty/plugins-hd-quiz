@@ -83,7 +83,7 @@ class _hdq_dashboard
                 if ($quiz_type === "personality") {
                     $html .= '<span class="dashicons dashicons-networking" title = "General / Scored quiz"></span>';
                 } else {
-                    $html .= '<span class="dashicons dashicons-welcome-learn-more" titel = "Personality type quiz"></span>';
+                    $html .= '<span class="dashicons dashicons-welcome-learn-more" title = "Personality type quiz"></span>';
                 }
                 $html .= $quiz->name;
                 $html .= '<code>[HDquiz quiz = "' . esc_attr($quiz->term_id) . '"]</code>';
