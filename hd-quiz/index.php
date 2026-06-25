@@ -5,7 +5,9 @@
     * Plugin URI: https://harmonicdesign.ca/hd-quiz/
     * Author: Harmonic Design
     * Author URI: https://harmonicdesign.ca
-    * Version: 2.2.1
+    * Version: 2.2.2
+    * License: GPL-2.0+
+    * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
     * Text Domain: hd-quiz
     * Domain Path: /languages
 */
@@ -21,7 +23,7 @@ if (!defined('ABSPATH')) {
     die('Invalid request.');
 }
 if (!defined('HDQ_PLUGIN_VERSION')) {
-    define('HDQ_PLUGIN_VERSION', '2.2.1');
+    define('HDQ_PLUGIN_VERSION', '2.2.2');
 }
 
 // Settings that a power user might want to change,

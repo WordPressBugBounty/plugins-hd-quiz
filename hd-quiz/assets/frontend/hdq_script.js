@@ -3,7 +3,6 @@ const HDQ = {
 	init: async function () {
 		console.log("HD Quiz v" + HDQ_VERSION + " init [general]");
 		HDQ.VARS = HDQ_DATA;
-		HDQ.nonce();
 
 		HDQ.el = document.getElementsByClassName("hdq_quiz_wrapper")[0];
 		HDQ.VARS.timer = {
@@ -36,6 +35,8 @@ const HDQ = {
 		HDQ.paginate.init();
 		HDQ.timer.init();
 		HDQ.kb();
+
+		HDQ.nonce();
 	},
 	nonce: async function () {
 		const nonce = await fetch(HDQ.VARS.quiz.ajax_url, {

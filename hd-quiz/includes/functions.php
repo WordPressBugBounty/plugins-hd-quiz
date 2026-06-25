@@ -37,6 +37,7 @@ function hdq_validate_nonce($data)
         $res->status = "fail";
         $res->html = "Unable to validate your credentials. Your NONCE may have expired. Please reload this page from your WordPress admin to refresh your NONCE.";
         echo json_encode($res);
+        die();
     }
 }
 

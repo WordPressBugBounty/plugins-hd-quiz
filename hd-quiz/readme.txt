@@ -3,7 +3,7 @@ Contributors: Harmonic_Design, HarmonicDesign
 Tags: quiz, quizzes, quiz maker, exam
 Requires at least: 6.0
 Tested up to: 7.0
-Stable tag: 2.2.1
+Stable tag: 2.2.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -204,6 +204,10 @@ Quiz, quizzes, create a quiz, add a quiz, quiz plugin, hdq, harmonic design, HDP
 4. Questions Page
 
 == Changelog ==
+= 2.2.2 =
+* - Security update
+* - Minor improvements
+
 = 2.2.1 =
 * - next/prev question buttons on question edit page
 * - Dedicated "secure mode" option in HD Quiz settings
@@ -442,7 +446,6 @@ Massive rewrite of almost the entire plugin. Please do not hesitate to ask for s
 * These options are global options and can be found under HD Quiz -> About / Options
 
 == Upgrade Notice ==
-= 2.2.1 =
-* - next/prev question buttons on question edit page
-* - Dedicated "secure mode" option in HD Quiz settings
-* - Minor code improvements
+= 2.2.2 =
+* - Security update
+* - Minor improvements
